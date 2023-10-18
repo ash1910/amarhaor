@@ -16,12 +16,17 @@ class UsersTableSeeder extends Seeder
         \App\Models\User::insert([
             [
                 'name' => 'Admin',
-                'email' => 'admin@dentalcare.com',
+                'email' => 'admin@amarhaor.com',
                 'password' => \Hash::make('123456'),
             ],
             [
                 'name' => 'Ashraful',
-                'email' => 'ashraful1910@gmail.com',
+                'email' => 'ashraful@hnsautomobiles.com',
+                'password' => \Hash::make('123456'), 
+            ],
+            [
+                'name' => 'Mahbub',
+                'email' => 'mahbub@hnsautomobiles.com',
                 'password' => \Hash::make('123456'), 
             ],
         ]);

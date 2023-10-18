@@ -59,16 +59,25 @@ class PaymentCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(PaymentRequest::class);
+        CRUD::setOperationSetting('contentClass', 'col-md-12 bold-labels');
 
-        CRUD::field('id');
-        CRUD::field('created_at');
-        CRUD::field('updated_at');
+        // -----------------
+        // Basic
+        // -----------------
 
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
+        CRUD::field('created_at')
+                ->type('datetime')
+                ->label('Date')
+                ->default(date("Y-m-d H:i:s"))
+                ->tab('Basic')
+                ->size(6);
+
+        CRUD::field('age')
+                ->type('text')
+                ->label('Age')
+                ->tab('Basic')
+                ->size(6);
+
     }
 
     /**

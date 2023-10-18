@@ -44,7 +44,7 @@
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('landing-page') }}'><i class='nav-icon la la-file-o'></i> Landing page</a></li>
 
-
-
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('patient') }}'><i class='nav-icon la la-question'></i> Patients</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('payment') }}'><i class='nav-icon la la-question'></i> Payments</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('district') }}'><i class='nav-icon la la-files-o'></i> Districts</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('upazila') }}'><i class='nav-icon la la-files-o'></i> Upazilas</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('haor') }}'><i class='nav-icon la la-files-o'></i> Haors</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('haor-detail') }}'><i class='nav-icon la la-files-o'></i> Haor details</a></li>

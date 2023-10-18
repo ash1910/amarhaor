@@ -29,7 +29,7 @@ class PatientCrudController extends CrudController
         CRUD::setModel(\App\Models\Patient::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/patient');
         CRUD::setEntityNameStrings('patient', 'patients');
-    }
+    } 
 
     /**
      * Define what happens when the List operation is loaded.
@@ -39,9 +39,10 @@ class PatientCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('id');
-        CRUD::column('created_at');
-        CRUD::column('updated_at');
+        CRUD::column('name');
+        CRUD::column('age');
+        CRUD::column('phone');
+        CRUD::column('sex');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -59,16 +60,50 @@ class PatientCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(PatientRequest::class);
+        CRUD::setOperationSetting('contentClass', 'col-md-12 bold-labels');
 
-        CRUD::field('id');
-        CRUD::field('created_at');
-        CRUD::field('updated_at');
+        // -----------------
+        // Basic
+        // -----------------
 
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
+        CRUD::field('name')
+                ->type('text')
+                ->label('Name')
+                ->tab('Basic')
+                ->size(6);
+
+        CRUD::field('age')
+                ->type('text')
+                ->label('Age')
+                ->tab('Basic')
+                ->size(6);
+
+        CRUD::field('sex')
+                ->type('select_from_array')
+                ->label('Sex')
+                ->tab('Basic')
+                ->options(['male' => 'Male', 'female' => 'Female', 'other' => 'Other'])
+                ->size(6);
+
+        CRUD::field('phone')
+                ->type('text')
+                ->label('Phone')
+                ->tab('Basic')
+                ->size(6);
+
+        CRUD::field('email')
+                ->type('email')
+                ->label('Email')
+                ->tab('Basic')
+                ->size(6);
+
+        CRUD::field('address')
+                ->type('textarea')
+                ->label('Address')
+                ->tab('Basic')
+                ->size(12);
+
+
     }
 
     /**

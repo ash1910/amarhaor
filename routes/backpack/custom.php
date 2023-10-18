@@ -22,4 +22,11 @@ Route::group([
     Route::crud('landing-page', 'LandingPageCrudController');
     Route::crud('patient', 'PatientCrudController');
     Route::crud('payment', 'PaymentCrudController');
+    Route::crud('district', 'DistrictCrudController');
+    Route::crud('upazila', 'UpazilaCrudController');
+    Route::crud('haor', 'HaorCrudController');
+    Route::crud('haor-detail', 'HaorDetailCrudController');
+
+    Route::get('upazila_model/ajax-upazila-options', 'UpazilaCrudController@upazilaOptions');
+
 }); // this should be the absolute last line of this file
