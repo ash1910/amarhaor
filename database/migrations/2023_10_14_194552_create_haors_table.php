@@ -22,13 +22,17 @@ class CreateHaorsTable extends Migration
             $table->string('area')->nullable();
             $table->string('thumb_img')->nullable();
             $table->string('thumb_img_big')->nullable();
+            $table->string('header_img')->nullable();
+            $table->text('overview')->nullable();
+            $table->text('about')->nullable();
+            $table->text('description')->nullable();
+            $table->json('gallery_items')->nullable();
 
             $table->foreign('district_id')
                 ->references('id')->on('districts');
 
             $table->foreign('upazila_id')
-                ->references('id')->on('upazilas')
-                ->onDelete('cascade');
+                ->references('id')->on('upazilas');
 
             $table->timestamps();
         });

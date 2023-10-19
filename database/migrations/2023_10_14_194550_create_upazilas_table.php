@@ -24,8 +24,7 @@ class CreateUpazilasTable extends Migration
             $table->text('description')->nullable();
 
             $table->foreign('district_id')
-                ->references('id')->on('districts')
-                ->onDelete('cascade');
+                ->references('id')->on('districts');
 
             $table->timestamps();
         });

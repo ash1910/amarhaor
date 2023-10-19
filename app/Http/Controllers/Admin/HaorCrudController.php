@@ -90,12 +90,12 @@ class HaorCrudController extends CrudController
         CRUD::field('name')
                 ->type('text')
                 ->label('Haor Name')
-                ->size(6);
+                ->size(4);
         
         CRUD::field('area')
                 ->type('text')
                 ->label('Haor Area')
-                ->size(4);
+                ->size(2);
 
         CRUD::field('thumb_img')
                 ->type('image')
@@ -110,6 +110,51 @@ class HaorCrudController extends CrudController
                 ->upload(true)
                 ->disk('public')
                 ->size(4);
+
+        CRUD::field('header_img')
+                ->type('image')
+                ->label('Header Image')
+                ->upload(true)
+                ->disk('public')
+                ->size(4);
+
+        CRUD::field('overview')
+                ->type('textarea')
+                ->label('Overview')
+                ->size(12);
+
+        CRUD::field('description')
+                ->type('ckeditor')
+                ->label('Description')
+                ->size(12);
+
+        CRUD::field('about')
+                ->type('ckeditor')
+                ->label('About')
+                ->size(12);
+
+        CRUD::addField([
+            'name' => 'gallery_items',
+            'label' => 'Gallery Images',
+            'type' => 'repeatable',
+            'fields' => [
+                [
+                    'name' => 'image',
+                    'label' => 'Image',
+                    'type' => 'image',
+                    'disk' => 'public',
+                    'upload' => true,
+                    //'prefix'    => '/storage/',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                    
+                ],
+            ],
+            'new_item_label' => 'Add Image',
+            'size' => 12,
+        ]);
+
 
     }
 
