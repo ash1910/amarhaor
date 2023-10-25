@@ -5,7 +5,7 @@
 /public/uploads/images/
 Homestead.yaml
 Homestead.json
-.env
+.env 
 .idea
 .DS_Store
 .packages
