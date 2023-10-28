@@ -57,6 +57,28 @@ class CreateLandingPagesTable extends Migration
 
             $table->json('home_gallery_items')->nullable();
 
+            $table->string('statistics_page_title')->nullable();
+            $table->string('statistics_page_overview')->nullable();
+            $table->text('statistics_page_content')->nullable();
+            $table->text('statistics_page_right_content')->nullable();
+
+            $table->string('travel_page_title')->nullable();
+            $table->text('travel_page_how_to_go_content')->nullable();
+            $table->string('travel_page_how_to_go_image')->nullable();
+            $table->text('travel_page_where_to_stay_content')->nullable();
+            $table->string('travel_page_where_to_stay_image')->nullable();
+
+            $table->string('resort_page_title')->nullable();
+            $table->json('resort_page_hotel_list')->nullable();
+
+            $table->string('bird_page_title')->nullable();
+            $table->string('bird_page_overview')->nullable();
+            $table->text('bird_page_content')->nullable();
+
+            $table->string('fish_page_title')->nullable();
+            $table->string('fish_page_overview')->nullable();
+            $table->text('fish_page_content')->nullable();
+
             $table->string('cookie_policy_title')->nullable();
             $table->text('cookie_policy_content')->nullable();
 
