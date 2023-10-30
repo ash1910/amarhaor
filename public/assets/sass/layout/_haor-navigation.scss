@@ -6,6 +6,10 @@ START: Haor Navigation CSS
 .haor_navigation {
 	padding: 55px 0;
 	border-top: 1px solid var(--ss-color-border-1);
+
+	@media #{$xs, $sm} {
+		padding: 60px 0;
+	}
 }
 .haor_navigation_inner {
 	position: relative;
@@ -89,6 +93,51 @@ START: Haor Navigation CSS
 				left: auto;
 				right: 0;
 			}
+		}
+	}
+
+	@media #{$md} {
+		.navigation_item {
+			max-width: 320px;
+			padding-left: 40px;
+
+			.haor_arrow {
+				width: 40px;
+			}
+
+			&.next {
+				padding-right: 40px;
+			}
+		}
+	}
+
+	@media #{$xs, $sm} {
+		gap: 60px;
+
+		.navigation_item {
+			max-width: 100%;
+			min-height: auto;
+			padding-left: 40px;
+
+			.label {
+				font-size: 16px;
+			}
+
+			.haor_arrow {
+				width: 40px;
+			}
+
+			&.next {
+				padding-right: 40px;
+			}
+		}
+
+		&::after {
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 100%;
+			height: 1px;
 		}
 	}
 }

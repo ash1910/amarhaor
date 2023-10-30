@@ -12,22 +12,48 @@ START: Exploring CSS
 		margin-left: auto;
 		margin-right: auto;
 	}
+
+	@media #{$xs, $sm} {
+		padding-top: 60px;
+	}
 }
 
 .grid .gutter-sizer {
 	width: 1%;
 }
-.grid .grid-item {
-	width: 30%;
-	height: 502px;
-	background: var(--ss-color-grey-1);
-	margin-bottom: 1%;
-}
-.grid .grid-item--width2 {
-	width: 38%;
-}
-.grid .grid-item--width3 {
-	width: 49.5%;
+.grid {
+	.grid-item {
+		width: 30%;
+		height: 502px;
+		background: var(--ss-color-grey-1);
+		margin-bottom: 1%;
+
+		&.grid-item--width2 {
+			width: 38%;
+		}
+		&.grid-item--width3 {
+			width: 49.5%;
+		}
+
+		@media #{$lg} {
+			height: 450px;
+		}
+		@media #{$md} {
+			height: 350px;
+		}
+		@media #{$xs, $sm} {
+			width: 100%;
+			height: 350px;
+			margin-bottom: 20px;
+
+			&.grid-item--width2 {
+				width: 100%;
+			}
+			&.grid-item--width3 {
+				width: 100%;
+			}
+		}
+	}
 }
 .explore_card {
 	overflow: hidden;
@@ -99,6 +125,10 @@ START: Exploring CSS
 			font-size: 16px;
 			line-height: 1;
 			color: var(--ss-color-common-white);
+		}
+
+		@media #{$xs, $sm} {
+			left: 20px;
 		}
 	}
 }

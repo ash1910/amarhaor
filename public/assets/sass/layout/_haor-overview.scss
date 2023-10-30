@@ -70,6 +70,27 @@ START: Haor Overview CSS
 			}
 		}
 	}
+
+	@media #{$xs, $sm} {
+		.desc {
+			font-size: 16px;
+		}
+
+		.overview_carousel {
+			margin-top: 50px;
+
+			&_item,
+			.owl-item {
+				max-height: 350px;
+			}
+
+			.owl-thumbs {
+				.owl-thumb-item {
+					height: 50px;
+				}
+			}
+		}
+	}
 }
 
 .effects-page {

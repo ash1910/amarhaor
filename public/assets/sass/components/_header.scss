@@ -54,6 +54,10 @@ START: Header CSS
 
 .header_topbar {
 	padding-top: 15px;
+
+	@media #{$xs, $sm, $md} {
+		padding-top: 0;
+	}
 }
 .topbar_content {
 	display: flex;
@@ -80,9 +84,6 @@ START: Header CSS
 					display: inline-flex;
 					align-items: center;
 					gap: 8px;
-					// i {
-					// 	color: var(--ss-color-theme-primary);
-					// }
 
 					&:hover {
 						color: var(--ss-color-theme-primary);
@@ -132,6 +133,23 @@ START: Header CSS
 			margin-left: 25px;
 		}
 	}
+
+	@media #{$xs, $sm} {
+		.topbar_content_left {
+			.contact_list {
+				gap: 15px;
+			}
+		}
+		.topbar_content_right {
+			.social_list{
+				gap: 12px;
+			}
+			.header_lang {
+				padding-left: 11px;
+				margin-left: 10px;
+			}
+		}
+	}
 }
 
 .main_header {
@@ -169,6 +187,12 @@ START: Header CSS
 							color: var(--ss-color-theme-primary);
 						}
 					}
+				}
+			}
+
+			@media #{$md} {
+				ul {
+					gap: 20px;
 				}
 			}
 		}
@@ -229,6 +253,30 @@ START: Header CSS
 						}
 					}
 				}
+			}
+
+			@media #{$md} {
+				padding: 20px 15px;
+				margin-left: 20px;
+			}
+		}
+		.menu_bar {
+			background-color: var(--ss-color-theme-primary);
+			border-radius: 50%;
+			margin-left: auto;
+
+			.bars {
+				display: inline-flex;
+				justify-content: center;
+				align-items: center;
+				width: 56px;
+				height: 56px;
+				background-color: var(--ss-color-common-white);
+				margin: 2px;
+				border-radius: 50%;
+				font-size: 25px;
+				line-height: 1;
+				color: var(--ss-color-theme-primary);
 			}
 		}
 	}

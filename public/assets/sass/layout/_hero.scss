@@ -9,7 +9,7 @@ START: Hero CSS
 	align-items: center;
 	justify-content: center;
 	position: relative;
-	overflow: hidden;
+	// overflow: hidden;
 	z-index: 2;
 
 	&::before {
@@ -86,6 +86,13 @@ START: Hero CSS
 			font-size: 14px;
 			text-transform: capitalize;
 		}
+	}
+
+	@media #{$lg} {
+		min-height: 800px;
+	}
+	@media #{$xs, $sm, $md} {
+		min-height: 700px;
 	}
 }
 .hero_content {
@@ -189,6 +196,42 @@ START: Hero CSS
 				color: var(--ss-color-common-white);
 				padding: 16px 25px;
 				margin-left: 15px;
+			}
+		}
+	}
+
+	@media #{$md} {
+		margin-top: 70px;
+
+		.hero_content_search {
+			form {
+				input:not([type="submit"]):not([type="radio"]):not([type="checkbox"]) {
+					width: calc(100% - 470px);
+				}
+				.nice-select {
+					max-width: 160px;
+				}
+			}
+		}
+	}
+	@media #{$xs, $sm} {
+		margin-top: 70px;
+
+		.hero_content_search {
+			form {
+				gap: 10px;
+				justify-content: center;
+
+				input:not([type="submit"]):not([type="radio"]):not([type="checkbox"]) {
+					width: 100%;
+				}
+				.nice-select {
+					max-width: 160px;
+					margin-left: 0;
+				}
+				#district + .nice-select {
+					border: none;
+				}
 			}
 		}
 	}

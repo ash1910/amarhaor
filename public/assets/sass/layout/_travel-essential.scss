@@ -57,10 +57,15 @@ START: Travel Essential CSS
 	}
 }
 
-.travel-essential {
+.travel-essential-page {
 	padding-top: 80px;
 	border-top: 1px solid var(--ss-color-border-1);
 	padding-bottom: 120px;
+
+	@media #{$xs, $sm} {
+		padding-top: 60px;
+		padding-bottom: 0;
+	}
 }
 .travel_essential_wrap {
 	.single_essential {
@@ -87,6 +92,21 @@ START: Travel Essential CSS
 			.btn {
 				margin-top: 15px;
 				padding: 17px 30px;
+			}
+		}
+
+		@media #{$md} {
+			.essential_image {
+				margin-bottom: 50px;
+
+				img {
+					width: 100%;
+				}
+			}
+		}
+		@media #{$xs, $sm} {
+			.essential_image {
+				margin-bottom: 40px;
 			}
 		}
 	}

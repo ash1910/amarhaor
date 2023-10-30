@@ -94,7 +94,19 @@ class LandingPageCrudController extends CrudController
                 ->upload(true)
                 ->disk('public')
                 ->tab('Header')
-                ->size(6);
+                ->size(4);
+
+        CRUD::field('topbar_telephone')
+                ->type('text')
+                ->label('Header Telephone')
+                ->tab('Header')
+                ->size(4);
+
+        CRUD::field('topbar_email')
+                ->type('text')
+                ->label('Header Email')
+                ->tab('Header')
+                ->size(4);
 
         CRUD::field('topbar_menu_items')
                 ->type('table')
@@ -104,7 +116,7 @@ class LandingPageCrudController extends CrudController
                     'url'  => 'URL',
                 ])
                 ->tab('Header')
-                ->size(10);
+                ->size(12);
 
         CRUD::addField([
             'name' => 'social_media_menu_items',
@@ -126,52 +138,19 @@ class LandingPageCrudController extends CrudController
                     'label' => 'URL',
                     'type' => 'text',
                     'wrapper' => [
-                        'class' => 'col-md-6',
+                        'class' => 'col-md-8',
                     ],
                     
                 ],
             ],
             'new_item_label' => 'Add',
             'tab' => 'Header',
-            'size' => 10,
+            'size' => 12,
         ]);
 
-
-        // -----------------
-        // Home tab
-        // -----------------
-
-        CRUD::field('home_top_img')
-                ->type('image')
-                ->label('Top Background Image')
-                ->upload(true)
-                ->disk('public')
-                ->tab('Home')
-                ->size(6);
-
-        CRUD::field('home_top_img2')
-                ->type('image')
-                ->label('Top Background Image (After Effect)')
-                ->upload(true)
-                ->disk('public')
-                ->tab('Home')
-                ->size(6);
-
-        CRUD::field('home_top_title')
-                ->type('text')
-                ->label('Top Title')
-                ->tab('Home')
-                ->size(6);
-
-        CRUD::field('home_top_text')
-                ->type('textarea')
-                ->label('Top Text')
-                ->tab('Home')
-                ->size(12);
-
         CRUD::addField([
-            'name' => 'home_content_items',
-            'label' => 'Content Blocks',
+            'name' => 'mega_menu_items',
+            'label' => 'Mega Menu Items',
             'type' => 'repeatable',
             'fields' => [
                 [
@@ -182,7 +161,7 @@ class LandingPageCrudController extends CrudController
                     'upload' => true,
                     //'prefix'    => '/storage/',
                     'wrapper' => [
-                        'class' => 'col-md-2',
+                        'class' => 'col-md-4',
                     ],
                     
                 ],
@@ -191,15 +170,7 @@ class LandingPageCrudController extends CrudController
                     'label' => 'Title',
                     'type' => 'text',
                     'wrapper' => [
-                        'class' => 'col-md-2',
-                    ],
-                ],
-                [
-                    'name' => 'text',
-                    'label' => 'Text',
-                    'type' => 'ckeditor',
-                    'wrapper' => [
-                        'class' => 'col-md-6',
+                        'class' => 'col-md-4',
                     ],
                 ],
                 [
@@ -207,7 +178,90 @@ class LandingPageCrudController extends CrudController
                     'label' => 'URL',
                     'type' => 'text',
                     'wrapper' => [
-                        'class' => 'col-md-2',
+                        'class' => 'col-md-4',
+                    ],
+                    
+                ],
+            ],
+            'new_item_label' => 'Add',
+            'tab' => 'Header',
+            'size' => 12,
+        ]);
+
+
+        // -----------------
+        // Home tab
+        // -----------------
+
+        CRUD::field('home_top_hero_image')
+                ->type('image')
+                ->label('Top Background Image')
+                ->upload(true)
+                ->disk('public')
+                ->tab('Home')
+                ->size(6);
+
+        CRUD::field('home_top_hero_video_url')
+                ->type('text')
+                ->label('Top Background Video URL')
+                ->tab('Home')
+                ->size(6);
+
+        CRUD::field('home_top_hero_title')
+                ->type('text')
+                ->label('Top Title')
+                ->tab('Home')
+                ->size(4);
+
+        CRUD::field('home_top_hero_text')
+                ->type('textarea')
+                ->label('Top Text')
+                ->tab('Home')
+                ->size(8);
+
+        CRUD::field('home_exploring_title')
+                ->type('text')
+                ->label('Exploring Section Title')
+                ->tab('Home')
+                ->size(4);
+
+        CRUD::field('home_exploring_text')
+                ->type('textarea')
+                ->label('Exploring Section Text')
+                ->tab('Home')
+                ->size(8);
+
+        CRUD::addField([
+            'name' => 'home_exploring_items',
+            'label' => 'Exploring Section Items',
+            'type' => 'repeatable',
+            'fields' => [
+                [
+                    'name' => 'image',
+                    'label' => 'Image',
+                    'type' => 'image',
+                    'disk' => 'public',
+                    'upload' => true,
+                    //'prefix'    => '/storage/',
+                    'wrapper' => [
+                        'class' => 'col-md-4',
+                    ],
+                    
+                ],
+                [
+                    'name' => 'title',
+                    'label' => 'Title',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-4',
+                    ],
+                ],
+                [
+                    'name' => 'url',
+                    'label' => 'URL',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-4',
                     ],
                     
                 ],
@@ -217,9 +271,45 @@ class LandingPageCrudController extends CrudController
             'size' => 12,
         ]);
 
+        CRUD::field('home_statistics_total_haors')
+                ->type('text')
+                ->label('Statistic Section Total Haors')
+                ->tab('Home')
+                ->size(4);
+
+        CRUD::field('home_statistics_total_area')
+                ->type('text')
+                ->label('Statistic Section Total Area')
+                ->tab('Home')
+                ->size(4);
+
+        CRUD::field('home_statistics_total_projects')
+                ->type('text')
+                ->label('Statistic Section Total Projects')
+                ->tab('Home')
+                ->size(4);
+
+        CRUD::field('home_featured_haors_title')
+                ->type('text')
+                ->label('Featured Section Title')
+                ->tab('Home')
+                ->size(4);
+
+        CRUD::field('home_featured_haors_sub_title')
+                ->type('text')
+                ->label('Featured Section Sub Title')
+                ->tab('Home')
+                ->size(4);
+
+        CRUD::field('home_featured_haors_view_all_url')
+                ->type('text')
+                ->label('Featured Section View All URL')
+                ->tab('Home')
+                ->size(4);
+
         CRUD::addField([
-            'name' => 'about_content_items',
-            'label' => 'Content Blocks',
+            'name' => 'home_featured_haors_items',
+            'label' => 'Featured Section Items',
             'type' => 'repeatable',
             'fields' => [
                 [
@@ -235,32 +325,484 @@ class LandingPageCrudController extends CrudController
                     
                 ],
                 [
-                    'name' => 'text',
-                    'label' => 'Text',
-                    'type' => 'textarea',
+                    'name' => 'title',
+                    'label' => 'Title',
+                    'type' => 'text',
                     'wrapper' => [
-                        'class' => 'col-md-9',
+                        'class' => 'col-md-3',
+                    ],
+                ],
+                [
+                    'name' => 'subtitle',
+                    'label' => 'Sub Title',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                ],
+                [
+                    'name' => 'url',
+                    'label' => 'URL',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
                     ],
                 ],
             ],
             'new_item_label' => 'Add',
-            'tab' => 'About',
+            'tab' => 'Home',
             'size' => 12,
         ]);
 
-        CRUD::field('contact_img')
-                ->type('image')
-                ->label('Image')
-                ->upload(true)
-                ->disk('public')
-                ->tab('Contact')
-                ->size(6);
+        CRUD::field('home_haor_map_title')
+                ->type('text')
+                ->label('Map Section Title')
+                ->tab('Home')
+                ->size(4);
 
-        CRUD::field('contact_title')
+        CRUD::field('home_haor_map_text')
+                ->type('textarea')
+                ->label('Map Section Text')
+                ->tab('Home')
+                ->size(8);
+
+        CRUD::addField([
+            'name' => 'home_haor_map_items',
+            'label' => 'Map Section Items',
+            'type' => 'repeatable',
+            'fields' => [
+                [
+                    'name' => 'district',
+                    'label' => 'District',
+                    'type' => 'select_from_array',
+                    'options' => ["Sylhet" => "Sylhet", "Sunamgang" => "Sunamgang", "Netrokona" => "Netrokona", "Kishoreganj" => "Kishoreganj", "Brahmanbaria" => "Brahmanbaria", "Habiganj" => "Habiganj", "Maulvibazar" => "Maulvibazar"],
+                    'allows_null' => false,
+                    'wrapper' => [
+                        'class' => 'col-md-4',
+                    ],
+                ],
+                [
+                    'name' => 'url',
+                    'label' => 'URL',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-8',
+                    ],
+                ],
+            ],
+            'new_item_label' => 'Add',
+            'tab' => 'Home',
+            'size' => 12,
+        ]);
+
+        CRUD::field('home_conservation_effects_title')
+                ->type('text')
+                ->label('Conservation Effects Section Title')
+                ->tab('Home')
+                ->size(4);
+
+        CRUD::field('home_conservation_effects_text')
+                ->type('textarea')
+                ->label('Conservation Effects Section Text')
+                ->tab('Home')
+                ->size(8);
+
+        CRUD::addField([
+            'name' => 'home_conservation_effects_items',
+            'label' => 'Conservation Effects Section Items',
+            'type' => 'repeatable',
+            'fields' => [
+                [
+                    'name' => 'image',
+                    'label' => 'Image',
+                    'type' => 'image',
+                    'disk' => 'public',
+                    'upload' => true,
+                    //'prefix'    => '/storage/',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                    
+                ],
+                [
+                    'name' => 'title',
+                    'label' => 'Title',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                ],
+                [
+                    'name' => 'text',
+                    'label' => 'Text',
+                    'type' => 'textarea',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                ],
+                [
+                    'name' => 'url',
+                    'label' => 'URL',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                ],
+            ],
+            'new_item_label' => 'Add',
+            'tab' => 'Home',
+            'size' => 12,
+        ]);
+
+        CRUD::field('home_summary_report_title')
+                ->type('text')
+                ->label('Report Section Title')
+                ->tab('Home')
+                ->size(4);
+
+        CRUD::field('home_summary_report_sub_title')
+                ->type('text')
+                ->label('Report Section Sub Title')
+                ->tab('Home')
+                ->size(4);
+
+        CRUD::field('home_summary_report_view_all_url')
+                ->type('text')
+                ->label('Report Section View All URL')
+                ->tab('Home')
+                ->size(4);
+
+        CRUD::addField([
+            'name' => 'home_summary_report_items',
+            'label' => 'Report Section Items',
+            'type' => 'repeatable',
+            'fields' => [
+                [
+                    'name' => 'image',
+                    'label' => 'Image',
+                    'type' => 'image',
+                    'disk' => 'public',
+                    'upload' => true,
+                    //'prefix'    => '/storage/',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                    
+                ],
+                [
+                    'name' => 'title',
+                    'label' => 'Title',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                ],
+                [
+                    'name' => 'subtitle',
+                    'label' => 'Sub Title',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                ],
+                [
+                    'name' => 'url',
+                    'label' => 'URL',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                ],
+            ],
+            'new_item_label' => 'Add',
+            'tab' => 'Home',
+            'size' => 12,
+        ]);
+
+        CRUD::field('home_recreation_tourism_title')
+                ->type('text')
+                ->label('Recreation and Tourism Section Title')
+                ->tab('Home')
+                ->size(12);
+
+        CRUD::addField([
+            'name' => 'home_recreation_tourism_items',
+            'label' => 'Recreation and Tourism Section Items',
+            'type' => 'repeatable',
+            'fields' => [
+                [
+                    'name' => 'image',
+                    'label' => 'Image',
+                    'type' => 'image',
+                    'disk' => 'public',
+                    'upload' => true,
+                    //'prefix'    => '/storage/',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                    
+                ],
+                [
+                    'name' => 'title',
+                    'label' => 'Title',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                ],
+                [
+                    'name' => 'subtitle',
+                    'label' => 'Sub Title',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                ],
+                [
+                    'name' => 'url',
+                    'label' => 'URL',
+                    'type' => 'text',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                ],
+            ],
+            'new_item_label' => 'Add',
+            'tab' => 'Home',
+            'size' => 12,
+        ]);
+
+        CRUD::addField([
+            'name' => 'home_gallery_items',
+            'label' => 'Gallery Section Items',
+            'type' => 'repeatable',
+            'fields' => [
+                [
+                    'name' => 'image',
+                    'label' => 'Thumbnail Image',
+                    'type' => 'image',
+                    'disk' => 'public',
+                    'upload' => true,
+                    //'prefix'    => '/storage/',
+                    'wrapper' => [
+                        'class' => 'col-md-6',
+                    ],
+                ],
+                [
+                    'name' => 'image2',
+                    'label' => 'Modal Image',
+                    'type' => 'image',
+                    'disk' => 'public',
+                    'upload' => true,
+                    //'prefix'    => '/storage/',
+                    'wrapper' => [
+                        'class' => 'col-md-6',
+                    ],
+                ],
+            ],
+            'new_item_label' => 'Add',
+            'tab' => 'Home',
+            'size' => 12,
+        ]);
+
+        // -----------------
+        // Statistics Page tab
+        // -----------------
+
+        CRUD::field('statistics_page_title')
                 ->type('text')
                 ->label('Title')
-                ->tab('Contact')
+                ->tab('Statistics Page')
+                ->size(3);
+
+        CRUD::field('statistics_page_header_image')
+                ->type('image')
+                ->label('Header Image')
+                ->upload(true)
+                ->disk('public')
+                ->tab('Statistics Page')
+                ->size(3);
+
+        CRUD::field('statistics_page_overview')
+                ->type('textarea')
+                ->label('Overview')
+                ->tab('Statistics Page')
                 ->size(6);
+
+        CRUD::field('statistics_page_content')
+                ->type('ckeditor')
+                ->label('Content')
+                ->tab('Statistics Page')
+                ->size(8);
+
+        CRUD::field('statistics_page_right_content')
+                ->type('ckeditor')
+                ->label('Right Content')
+                ->tab('Statistics Page')
+                ->size(4);
+
+        // -----------------
+        // Bird Page tab
+        // -----------------
+
+        CRUD::field('bird_page_title')
+                ->type('text')
+                ->label('Title')
+                ->tab('Bird Page')
+                ->size(3);
+
+        CRUD::field('bird_page_header_image')
+                ->type('image')
+                ->label('Header Image')
+                ->upload(true)
+                ->disk('public')
+                ->tab('Bird Page')
+                ->size(3);
+
+        CRUD::field('bird_page_overview')
+                ->type('textarea')
+                ->label('Overview')
+                ->tab('Bird Page')
+                ->size(6);
+
+        CRUD::field('bird_page_content')
+                ->type('ckeditor')
+                ->label('Content')
+                ->tab('Bird Page')
+                ->size(12);
+
+        // -----------------
+        // Fish Page tab
+        // -----------------
+
+        CRUD::field('fish_page_title')
+                ->type('text')
+                ->label('Title')
+                ->tab('Fish Page')
+                ->size(3);
+
+        CRUD::field('fish_page_header_image')
+                ->type('image')
+                ->label('Header Image')
+                ->upload(true)
+                ->disk('public')
+                ->tab('Fish Page')
+                ->size(3);
+
+        CRUD::field('fish_page_overview')
+                ->type('textarea')
+                ->label('Overview')
+                ->tab('Fish Page')
+                ->size(6);
+
+        CRUD::field('fish_page_content')
+                ->type('ckeditor')
+                ->label('Content')
+                ->tab('Fish Page')
+                ->size(12);
+
+        // -----------------
+        // Travel Page tab
+        // -----------------
+
+        CRUD::field('travel_page_title')
+                ->type('text')
+                ->label('Title')
+                ->tab('Travel Page')
+                ->size(6);
+
+        CRUD::field('travel_page_header_image')
+                ->type('image')
+                ->label('Header Image')
+                ->upload(true)
+                ->disk('public')
+                ->tab('Travel Page')
+                ->size(6);
+
+        CRUD::field('travel_page_how_to_go_content')
+                ->type('ckeditor')
+                ->label('How To Go Content')
+                ->tab('Travel Page')
+                ->size(8);
+
+        CRUD::field('travel_page_how_to_go_image')
+                ->type('image')
+                ->label('How To Go Image')
+                ->upload(true)
+                ->disk('public')
+                ->tab('Travel Page')
+                ->size(4);
+
+        CRUD::field('travel_page_where_to_stay_image')
+                ->type('image')
+                ->label('Where to Stay Image')
+                ->upload(true)
+                ->disk('public')
+                ->tab('Travel Page')
+                ->size(4);
+
+        CRUD::field('travel_page_where_to_stay_content')
+                ->type('ckeditor')
+                ->label('Where to Stay Content')
+                ->tab('Travel Page')
+                ->size(8);
+
+        // -----------------
+        // Resort Page tab
+        // -----------------
+
+        CRUD::field('resort_page_title')
+                ->type('text')
+                ->label('Title')
+                ->tab('Resort Page')
+                ->size(3);
+
+        CRUD::field('resort_page_header_image')
+                ->type('image')
+                ->label('Header Image')
+                ->upload(true)
+                ->disk('public')
+                ->tab('Resort Page')
+                ->size(3);
+
+        CRUD::addField([
+            'name' => 'resort_page_hotel_list',
+            'label' => 'Hotel List',
+            'type' => 'repeatable',
+            'fields' => [
+                [
+                    'name' => 'image',
+                    'label' => 'Image',
+                    'type' => 'image',
+                    'disk' => 'public',
+                    'upload' => true,
+                    //'prefix'    => '/storage/',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                    
+                ],
+                [
+                    'name' => 'content',
+                    'label' => 'Content',
+                    'type' => 'ckeditor',
+                    'wrapper' => [
+                        'class' => 'col-md-6',
+                    ],
+                ],
+                [
+                    'name' => 'contact',
+                    'label' => 'Contact',
+                    'type' => 'ckeditor',
+                    'wrapper' => [
+                        'class' => 'col-md-3',
+                    ],
+                ],
+            ],
+            'new_item_label' => 'Add',
+            'tab' => 'Resort Page',
+            'size' => 12,
+        ]);
 
 
         // -----------------
@@ -317,23 +859,43 @@ class LandingPageCrudController extends CrudController
                 ->tab('Footer')
                 ->size(6);
 
+        CRUD::field('footer_text')
+                ->type('text')
+                ->label('Footer Text')
+                ->tab('Footer')
+                ->size(6);
+
+        CRUD::field('footer_contact_address')
+                ->type('text')
+                ->label('Footer Contact Address')
+                ->tab('Footer')
+                ->size(6);
+
+        CRUD::field('footer_copyright_text')
+                ->type('ckeditor')
+                ->label('Footer Copyright Text')
+                ->tab('Footer')
+                ->size(6);
+
         CRUD::field('footer_link_items')
                 ->type('table')
-                ->label('Link Items')
+                ->label('Section 1 Link Items')
                 ->columns([
                     'text'  => 'Text',
                     'url'  => 'URL',
                 ])
                 ->tab('Footer')
-                ->size(10);
+                ->size(6);
 
-        CRUD::field('footer_copyright_text')
-                ->type('text')
-                ->label('Footer Copyright Text')
+        CRUD::field('footer_link_items_section2')
+                ->type('table')
+                ->label('Section 2 Link Items')
+                ->columns([
+                    'text'  => 'Text',
+                    'url'  => 'URL',
+                ])
                 ->tab('Footer')
-                ->size(8);
-        
-
+                ->size(6);
 
     }
 

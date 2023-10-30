@@ -30,6 +30,17 @@ START: Gallery CSS
 						&.center {
 							width: 675px !important;
 						}
+
+						@media #{$md} {
+							width: 250px !important;
+
+							&.center {
+								width: 500px !important;
+							}
+						}
+						@media #{$xs, $sm} {
+							width: auto !important;
+						}
 					}
 				}
 			}

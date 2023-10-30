@@ -34,10 +34,24 @@ Mobile Menu Js
 
 	////////////////////////////////////////////////////
 	// Mobile Menu Js
-	$("#mobile-menu").meanmenu({
-		meanMenuContainer: ".mobile-menu",
-		meanScreenWidth: "991",
-		meanExpand: ['<i class="fal fa-plus"></i>'],
+	$(".primary_menu").meanmenu({
+		meanMenuContainer: ".mobile_menu",
+		meanScreenWidth: "767",
+		meanExpand: ['<i class="fa-light fa-angle-right"></i>'],
+	});
+
+	$(".menu_bar .bars").on("click", function () {
+		$(".hamburger-area").addClass("opened");
+		$(".body-overlay").addClass("opened");
+	});
+	$(".hamburger_close_btn").on("click", function () {
+		$(".hamburger-area").removeClass("opened");
+		$(".body-overlay").removeClass("opened");
+	});
+
+	$(".body-overlay").on("click", function () {
+		$(".hamburger-area").removeClass("opened");
+		$(".body-overlay").removeClass("opened");
 	});
 
 	////////////////////////////////////////////////////
@@ -66,6 +80,29 @@ Mobile Menu Js
 			nextEl: ".featured_haors_nav-next",
 			prevEl: ".featured_haors_nav-prev",
 		},
+		breakpoints: {
+			575: {
+				spaceBetween: 25,
+				coverflowEffect: {
+					modifier: 2,
+					initialSlide: 1,
+				},
+			},
+			767: {
+				spaceBetween: 30,
+				coverflowEffect: {
+					modifier: 2,
+					initialSlide: 1,
+				},
+			},
+			991: {
+				spaceBetween: 30,
+				coverflowEffect: {
+					modifier: 2,
+					initialSlide: 1,
+				},
+			},
+		},
 	});
 
 	////////////////////////////////////////////////////
@@ -79,6 +116,21 @@ Mobile Menu Js
 		autoplay: true,
 		autoplayHoverPause: true,
 		autoplayTimeout: 3000,
+		responsive: {
+			0: {
+				items: 1,
+				center: false,
+			},
+			768: {
+				items: 3,
+			},
+			992: {
+				items: 3,
+			},
+			1200: {
+				items: 5,
+			},
+		},
 	});
 
 	////////////////////////////////////////////////////
@@ -109,6 +161,20 @@ Mobile Menu Js
 				"<i class='fal fa-arrow-left'></i>",
 				"<i class='fal fa-arrow-right'></i>",
 			],
+			responsive: {
+				0: {
+					items: 1,
+				},
+				576: {
+					items: 2,
+				},
+				768: {
+					items: 3,
+				},
+				992: {
+					items: 4,
+				},
+			},
 		});
 	}
 

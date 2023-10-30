@@ -15,10 +15,18 @@ START: Featured Haors CSS
 	.view_all_btn {
 		margin-top: 10px;
 	}
+
+	@media #{$xs, $sm} {
+		padding-top: 60px;
+	}
 }
 .featured_haors_carousel {
 	margin-bottom: 60px;
 	position: relative;
+
+	@media #{$xs, $sm} {
+		margin-bottom: 40px;
+	}
 }
 .featured_haor {
 	height: 500px;
@@ -92,6 +100,13 @@ START: Featured Haors CSS
 	// 		}
 	// 	}
 	// }
+
+	@media #{$lg} {
+		height: 450px;
+	}
+	@media #{$xs, $sm, $md} {
+		height: 350px;
+	}
 }
 .featured_haors_nav {
 	&-prev,

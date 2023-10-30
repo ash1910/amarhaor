@@ -72,6 +72,41 @@ h6 {
 	font-size: var(--ss-fs-h6);
 }
 
+@media #{$md} {
+	h1 {
+		font-size: 50px;
+	}
+	h2 {
+		font-size: 40px;
+	}
+	h3 {
+		font-size: 35px;
+	}
+	h4 {
+		font-size: 22px;
+	}
+}
+@media #{$xs, $sm} {
+	h1 {
+		font-size: 35px;
+	}
+	h2 {
+		font-size: 30px;
+	}
+	h3 {
+		font-size: 28px;
+	}
+	h4 {
+		font-size: 20px;
+	}
+	h5 {
+		font-size: 18px;
+	}
+	h6 {
+		font-size: 16px;
+	}
+}
+
 h1 a,
 h2 a,
 h3 a,
@@ -264,6 +299,12 @@ img {
 			margin-bottom: 0;
 		}
 	}
+
+	@media #{$xs, $sm} {
+		p {
+			font-size: 16px;
+		}
+	}
 }
 
 .view_all {
@@ -297,5 +338,11 @@ img {
 				z-index: -1;
 			}
 		}
+	}
+}
+
+.site-main {
+	@media #{$xs, $sm, $md, $lg, $xl, $xxl} {
+		overflow: hidden;
 	}
 }

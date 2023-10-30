@@ -56,5 +56,12 @@ START: Sidebar CSS
 			}
 		}
 	}
+
+	@media #{$xs, $sm, $md} {
+		max-width: 415px;
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 /* !END: Sidebar CSS */

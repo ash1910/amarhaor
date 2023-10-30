@@ -43,17 +43,56 @@ Route::get('/', function () {
     return view('pages.home', $data); // view('welcome');
 });
 
-Route::get('/contact-us', function () {
+Route::get('/district', function () {
     $data = page_fields();
 
-    return view('pages.contact-us', $data);
+    return view('pages.district', $data);
 });
 
-Route::get('/about-us', function () {
+Route::get('/upazila', function () {
     $data = page_fields();
 
-    return view('pages.about-us', $data);
+    return view('pages.upazila', $data);
 });
+
+Route::get('/haor-detail', function () {
+    $data = page_fields();
+
+    return view('pages.haor-detail', $data);
+});
+
+Route::get('/haors', function () {
+    $data = page_fields();
+
+    return view('pages.haors', $data);
+});
+
+Route::get('/statistics', function () {
+    $data = page_fields();
+
+    return view('pages.statistics', $data);
+});
+Route::get('/travel', function () {
+    $data = page_fields();
+
+    return view('pages.travel', $data);
+});
+Route::get('/resort', function () {
+    $data = page_fields();
+
+    return view('pages.resort', $data);
+});
+Route::get('/bird', function () {
+    $data = page_fields();
+
+    return view('pages.bird', $data);
+});
+Route::get('/fish', function () {
+    $data = page_fields();
+
+    return view('pages.fish', $data);
+});
+
 
 Route::get('/cookies', function () {
     $data = page_fields();
@@ -72,12 +111,4 @@ Route::get('/terms-of-use', function () {
 
     return view('pages.terms-of-use', $data);
 });
-
-Route::get('/thank-you', function () {
-
-    $data = page_fields();
-
-    return view('thank-you', $data);
-});
-
 

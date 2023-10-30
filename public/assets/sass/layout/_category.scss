@@ -16,6 +16,7 @@ START: Category CSS
 	@include flexbox();
 	align-items: center;
 	justify-content: center;
+	flex-wrap: wrap;
 	gap: 20px;
 
 	li {

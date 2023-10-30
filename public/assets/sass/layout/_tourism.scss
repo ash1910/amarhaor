@@ -10,6 +10,18 @@ START: Tourism CSS
 	.section_title {
 		margin-bottom: 50px;
 	}
+
+	@media #{$md} {
+		padding-bottom: 70px;
+	}
+	@media #{$xs, $sm} {
+		padding-top: 60px;
+		padding-bottom: 30px;
+
+		.section_title {
+			margin-bottom: 40px;
+		}
+	}
 }
 
 .tourism {
@@ -72,6 +84,23 @@ START: Tourism CSS
 					color: var(--ss-color-theme-primary);
 				}
 			}
+		}
+	}
+
+	@media #{$lg} {
+		.tourism_content {
+			padding: 30px 25px;
+		}
+	}
+	@media #{$md} {
+		max-width: 415px;
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	@media #{$xs, $sm} {
+		.tourism_content {
+			padding: 30px 20px;
 		}
 	}
 }

@@ -22,6 +22,15 @@ START: Conversion Effect CSS
 			color: var(--ss-color-border-1);
 		}
 	}
+
+	@media #{$xs, $sm} {
+		padding-top: 60px;
+		padding-bottom: 60px;
+
+		.section_title {
+			margin-bottom: 40px;
+		}
+	}
 }
 
 .conversion_effects {
@@ -124,6 +133,34 @@ START: Conversion Effect CSS
 						opacity: 0.8;
 						z-index: -1;
 					}
+				}
+			}
+		}
+	}
+
+	@media #{$xl} {
+		grid-template-columns: 262px 262px 262px 262px;
+		grid-template-rows: 350px 350px;
+	}
+	@media #{$lg} {
+		grid-template-columns: 300px 300px 300px;
+		grid-template-rows: 350px 350px;
+	}
+	@media #{$md} {
+		grid-template-columns: 335px 335px;
+		grid-template-rows: 400px 400px;
+	}
+	@media #{$xs, $sm} {
+		grid-template-columns: 100%;
+		grid-template-rows: 400px;
+		grid-gap: 30px;
+
+		.item_big {
+			grid-column: 1/2;
+
+			.conversion_effects_item_inner {
+				.effect_content {
+					padding: 30px 20px 40px 20px;
 				}
 			}
 		}

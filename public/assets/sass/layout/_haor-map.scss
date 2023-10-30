@@ -15,6 +15,15 @@ START: Haor Map CSS
 		margin-left: auto;
 		margin-right: auto;
 	}
+
+	@media #{$xs, $sm} {
+		padding-top: 60px;
+		padding-bottom: 60px;
+
+		.section_title {
+			margin-bottom: 40px;
+		}
+	}
 }
 
 .haor_map {
@@ -82,7 +91,49 @@ START: Haor Map CSS
 				bottom: 73px;
 				left: 130px;
 			}
+			@media #{$xs, $sm, $md} {
+				&.netrakona {
+					top: 36px;
+					left: 7px;
+					max-width: 35%;
+				}
+				&.sunamganj {
+					top: 29px;
+					left: 76px;
+					max-width: 35%;
+				}
+				&.sylhet {
+					top: 24px;
+					right: 11px;
+					max-width: 44%;
+				}
+				&.kishoreganj {
+					top: 121px;
+					left: 22px;
+					max-width: 32%;
+				}
+				&.habiganj {
+					top: 113px;
+					left: 102px;
+					max-width: 25%;
+				}
+				&.moulavibazar {
+					top: 82px;
+					right: 43px;
+					max-width: 32%;
+				}
+				&.brahmanbaria {
+					bottom: 30px;
+					left: 45px;
+					max-width: 28%;
+				}
+			}
 		}
+	}
+	@media #{$xs, $sm, $md} {
+		max-width: 315px;
+		height: 310px;
+		margin-bottom: 0;
 	}
 }
 /* !END: Haor Map CSS */

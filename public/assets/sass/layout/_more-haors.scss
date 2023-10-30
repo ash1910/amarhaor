@@ -10,6 +10,15 @@ START: More Haors CSS
 	.section_title {
 		margin-bottom: 50px;
 	}
+
+	@media #{$xs, $sm} {
+		padding-top: 30px;
+		padding-bottom: 60px;
+
+		.section_title {
+			margin-bottom: 40px;
+		}
+	}
 }
 .haor_lists {
 	ul {
@@ -29,6 +38,19 @@ START: More Haors CSS
 					color: var(--ss-color-theme-primary);
 					text-decoration: underline;
 					text-decoration-thickness: 1px;
+				}
+			}
+		}
+	}
+
+	@media #{$xs, $sm} {
+		ul {
+			column-count: 2;
+			column-gap: 20px;
+
+			li {
+				a {
+					font-size: 16px;
 				}
 			}
 		}

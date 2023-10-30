@@ -24,6 +24,29 @@ START: Footer CSS
 				}
 			}
 		}
+
+		@media #{$xs, $sm, $md} {
+			min-height: 100%;
+
+			&:nth-child(2) {
+				.footer_widget {
+					&::after {
+						display: none;
+					}
+				}
+			}
+		}
+		@media #{$xs, $sm} {
+			.footer_widget {
+				&::after {
+					display: none;
+				}
+			}
+		}
+	}
+
+	@media #{$xs, $sm} {
+		padding-top: 80px;
 	}
 }
 .footer_widget {
@@ -133,6 +156,11 @@ START: Footer CSS
 	justify-content: space-between;
 	padding: 40px 0;
 	border-top: 1px solid rgba(255, 255, 255, 0.2);
+	gap: 20px;
+
+	@media #{$xs, $sm} {
+		justify-content: center;
+	}
 }
 .copyright_text {
 	font-size: 16px;
@@ -167,6 +195,17 @@ START: Footer CSS
 					color: var(--ss-color-theme-primary);
 				}
 			}
+		}
+	}
+
+	@media #{$md} {
+		ul {
+			gap: 20px;
+		}
+	}
+	@media #{$xs, $sm} {
+		ul {
+			gap: 20px;
 		}
 	}
 }
