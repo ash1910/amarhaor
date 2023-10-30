@@ -26,31 +26,25 @@
           </div>
           <div class="hero_content_search">
             <form action="#" class="hero_search">
-              <input type="text" name="haor" id="haor" placeholder="Type haor or wetland name">
+              
               <select name="district" id="district">
                 <option selected>District</option>
-                <option value="Sylhet">Sylhet</option>
-                <option value="Sunamganj">Sunamganj</option>
-                <option value="Netrakona">Netrakona</option>
-                <option value="Kishoregonj">Kishoregonj</option>
-                <option value="Habiganj">Habiganj</option>
-                <option value="Maulvibazar">Maulvibazar</option>
-                <option value="brahamanbaria">brahamanbaria</option>
+                @foreach ($district_list ?? array() as $key => $name)
+                  <option value="{{ @$key }}">{{ @$name }}</option>
+                @endforeach
               </select>
               <select name="thana" id="thana">
                 <option selected>Thana</option>
-                <option value="Osmaninagar">Osmaninagar</option>
-                <option value="Golapganj">Golapganj</option>
-                <option value="Vishwanath">Vishwanath</option>
-                <option value="Biyanibazar">Biyanibazar</option>
-                <option value="Kanaighat">Kanaighat</option>
-                <option value="Jaintapur">Jaintapur</option>
-                <option value="Companyganj">Companyganj</option>
-                <option value="Balaganj">Balaganj</option>
-                <option value="Fenchuganj">Fenchuganj</option>
-                <option value="Goainghat">Goainghat</option>
-                <option value="Jokiganj">Jokiganj</option>
+                @foreach ($upazila_list ?? array() as $key => $item)
+                  <option value="{{ @$item['id'] }}" data-did="{{ @$item['district_id'] }}">{{ @$item['name'] }}</option>
+                @endforeach
               </select>
+              <input list="haor-list" type="text" name="haor" id="haor" placeholder="Type haor or wetland name">
+              <datalist id="haor-list">
+                @foreach ($haor_list ?? array() as $key => $item)
+                  <option data-id="{{ @$item['id'] }}" data-did="{{ @$item['district_id'] }}" data-uid="{{ @$item['upazila_id'] }}">{{ @$item['name'] }}</option>
+                @endforeach
+              </datalist>
 
               <button type="submit"><i class="fa-light fa-search"></i>Find</button>
             </form>
@@ -61,6 +55,33 @@
   </div>
 </section>
 <!-- end: Hero Section -->
+
+<script>
+// Adds a keyup listener on the input.
+input.addEventListener("keyup", (e) => {
+
+// If input value is longer or equal than 2 chars, adding "users" on ID attribute.
+if (e.target.value.length >= 2) {
+    datalist.setAttribute("id", "users");
+} else {
+    datalist.setAttribute("id", "");
+}
+});
+
+$('#myclass').on('change', function(){
+	var opt = $(this).find('option:selected');
+	$('#checkName option').prop('disabled', false);
+	if(opt.length > 0 && opt.text() != '--') {
+		$('#checkName option').prop('disabled', true);
+		$('#checkName option[value="'+opt.text()+'"]').prop('disabled', false);
+	}
+});
+
+$('#input').change(function(){
+        var abc = $("#browsers option[value='" + $('#input').val() + "']").attr('data-id');
+        alert(abc);
+    });
+</script>
 
 <!-- start: Exploring Section -->
 <section class="exploring-section" id="explore">

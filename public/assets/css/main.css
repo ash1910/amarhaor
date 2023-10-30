@@ -1430,6 +1430,8 @@ START: Hero CSS
   font-weight: var(--ss-fw-normal);
   color: var(--ss-color-heading-primary);
   width: calc(100% - 550px);
+  margin-left: 15px;
+  border-left: 1px solid var(--ss-color-border-2);
 }
 .hero_content_search form .nice-select {
   max-width: 200px;
@@ -1444,8 +1446,10 @@ START: Hero CSS
   font-weight: var(--ss-fw-normal);
   color: var(--ss-color-text-body);
   text-transform: capitalize;
-  margin-left: 15px;
   padding-left: 16px;
+}
+.hero_content .hero_content_search form #thana + .nice-select{
+  margin-left: 15px;
   border-left: 1px solid var(--ss-color-border-2);
 }
 .hero_content_search form .nice-select .list {
@@ -1509,6 +1513,10 @@ START: Hero CSS
     margin-left: 0;
   }
   .hero_content .hero_content_search form #district + .nice-select {
+    border: none;
+  }
+  .hero_content_search form input:not([type=submit]):not([type=radio]):not([type=checkbox]) {
+    margin-left: 0;
     border: none;
   }
 }

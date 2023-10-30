@@ -12,6 +12,9 @@
 */
 use Illuminate\Http\Request;
 use App\Models\LandingPage;
+use App\Models\District;
+use App\Models\Upazila;
+use App\Models\Haor;
 
 function page_fields(){
 
@@ -37,9 +40,32 @@ function page_fields(){
     return $data;
 }
 
+function district_list(){
+    $district_list = District::pluck('name', 'id');
+    $data = $district_list ? $district_list->toArray() : array();
+    return $data;
+}
+
+function upazila_list(){
+    $upazila_list = Upazila::all('name', 'id', 'district_id');
+    $data = $upazila_list ? $upazila_list->toArray() : array();
+    return $data;
+}
+
+function haor_list(){
+    $haor_list = Haor::all('name', 'id', 'district_id', 'upazila_id');
+    $data = $haor_list ? $haor_list->toArray() : array();
+    return $data;
+}
+
 Route::get('/', function () {
     $data = page_fields();
 
+    $data["district_list"] = district_list();
+    $data["upazila_list"] = upazila_list();
+    $data["haor_list"] = haor_list();
+    
+    //echo "<pre>";print_r($data);exit;
     return view('pages.home', $data); // view('welcome');
 });
 
