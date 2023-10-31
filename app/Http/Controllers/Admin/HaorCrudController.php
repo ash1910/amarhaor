@@ -46,6 +46,16 @@ class HaorCrudController extends CrudController
         CRUD::column('name')->label('Haor Name');
         CRUD::column('area');
 
+        $this->crud->addColumns([
+            [
+                'name' => 'Haor Page URL',
+                'type' => 'closure',
+                'function' => function($entry) {
+                    return '<a class="btn btn-sm btn-link" target="_blank" href="/haor-detail/'.$entry->id.'"><i class="la la-eye"></i> Open</a>';
+                },
+            ],
+        ]);
+
         $this->crud->denyAccess('show');
 
     }
@@ -67,6 +77,7 @@ class HaorCrudController extends CrudController
                 ->placeholder('Select District')
                 ->model('App\Models\District')
                 ->attribute('name')
+                ->placeholder('Select District')
                 ->options(function ($query) {
                     return $query->orderBy('name', 'ASC')->get();
                 })

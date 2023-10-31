@@ -93,7 +93,7 @@
       <div class="row">
         <div class="col">
           <div class="mega_menu_wrap">
-            @foreach ($topbar_menu_items ?? array() as $item)
+            @foreach ($mega_menu_items ?? array() as $item)
             <div class="mega_menu_wrap_item">
               <a href="{{ @$item['url'] }}" class="mega_menu_wrap_item_inner">
                 <div class="haor_image">

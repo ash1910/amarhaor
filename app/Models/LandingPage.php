@@ -60,20 +60,44 @@ class LandingPage extends Model
         $this->setImageAttribute($value, 'topbar_logo');
     }
 
-    public function setHomeTopImgAttribute($value)
+    public function setHomeTopHeroImageAttribute($value)
     {
-        $this->setImageAttribute($value, 'home_top_img');
+        $this->setImageAttribute($value, 'home_top_hero_image');
     }
 
-    public function setHomeTopImg2Attribute($value)
+    public function setStatisticsPageHeaderImageAttribute($value)
     {
-        $this->setImageAttribute($value, 'home_top_img2');
+        $this->setImageAttribute($value, 'statistics_page_header_image');
     }
 
-
-    public function setContactImgAttribute($value)
+    public function setBirdPageHeaderImageAttribute($value)
     {
-        $this->setImageAttribute($value, 'contact_img');
+        $this->setImageAttribute($value, 'bird_page_header_image');
+    }
+
+    public function setFishPageHeaderImageAttribute($value)
+    {
+        $this->setImageAttribute($value, 'fish_page_header_image');
+    }
+
+    public function setTravelPageHeaderImageAttribute($value)
+    {
+        $this->setImageAttribute($value, 'travel_page_header_image');
+    }
+
+    public function setTravelPageHowToGoImageAttribute($value)
+    {
+        $this->setImageAttribute($value, 'travel_page_how_to_go_image');
+    }
+
+    public function setTravelPageWhereToStayImageAttribute($value)
+    {
+        $this->setImageAttribute($value, 'travel_page_where_to_stay_image');
+    }
+
+    public function setResortPageHeaderImageAttribute($value)
+    {
+        $this->setImageAttribute($value, 'resort_page_header_image');
     }
 
     public function setFooterLogoAttribute($value)
@@ -81,14 +105,44 @@ class LandingPage extends Model
         $this->setImageAttribute($value, 'footer_logo');
     }
 
-    public function setHomeContentItemsAttribute($value) // Repeatable field
+    public function setMegaMenuItemsAttribute($value) // Repeatable field
     {
-        $this->attributes['home_content_items'] = $this->setRepeatableFieldWithImage($value);   
+        $this->attributes['mega_menu_items'] = $this->setRepeatableFieldWithImage($value);   
     }
 
-    public function setAboutContentItemsAttribute($value) // Repeatable field
+    public function setHomeExploringItemsAttribute($value) // Repeatable field
     {
-        $this->attributes['about_content_items'] = $this->setRepeatableFieldWithImage($value);   
+        $this->attributes['home_exploring_items'] = $this->setRepeatableFieldWithImage($value);   
+    }
+
+    public function setHomeFeaturedHaorsItemsAttribute($value) // Repeatable field
+    {
+        $this->attributes['home_featured_haors_items'] = $this->setRepeatableFieldWithImage($value);   
+    }
+
+    public function setHomeConservationEffectsItemsAttribute($value) // Repeatable field
+    {
+        $this->attributes['home_conservation_effects_items'] = $this->setRepeatableFieldWithImage($value);   
+    }
+
+    public function setHomeSummaryReportItemsAttribute($value) // Repeatable field
+    {
+        $this->attributes['home_summary_report_items'] = $this->setRepeatableFieldWithImage($value);   
+    }
+
+    public function setHomeRecreationTourismItemsAttribute($value) // Repeatable field
+    {
+        $this->attributes['home_recreation_tourism_items'] = $this->setRepeatableFieldWithImage($value);   
+    }
+
+    public function setHomeGalleryItemsAttribute($value) // Repeatable field
+    {
+        $this->attributes['home_gallery_items'] = $this->setRepeatableFieldWithImage($value);   
+    }
+
+    public function setResortPageHotelListAttribute($value) // Repeatable field
+    {
+        $this->attributes['resort_page_hotel_list'] = $this->setRepeatableFieldWithImage($value);   
     }
 
 

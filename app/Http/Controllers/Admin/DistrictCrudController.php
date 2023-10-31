@@ -45,6 +45,16 @@ class DistrictCrudController extends CrudController
         CRUD::column('area');
         CRUD::column('total_haor');
 
+        $this->crud->addColumns([
+            [
+                'name' => 'District Page URL',
+                'type' => 'closure',
+                'function' => function($entry) {
+                    return '<a class="btn btn-sm btn-link" target="_blank" href="/district/'.$entry->id.'"><i class="la la-eye"></i> Open</a>';
+                },
+            ],
+        ]);
+
         $this->crud->denyAccess('show');
     }
 

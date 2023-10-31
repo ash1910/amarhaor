@@ -48,6 +48,16 @@ class UpazilaCrudController extends CrudController
         CRUD::column('area');
         CRUD::column('total_haor');
 
+        $this->crud->addColumns([
+            [
+                'name' => 'Upazila Page URL',
+                'type' => 'closure',
+                'function' => function($entry) {
+                    return '<a class="btn btn-sm btn-link" target="_blank" href="/upazila/'.$entry->id.'"><i class="la la-eye"></i> Open</a>';
+                },
+            ],
+        ]);
+
         $this->crud->denyAccess('show');
     }
 

@@ -24,9 +24,17 @@ function page_fields(){
     $json_fields = array(
         'topbar_menu_items', 
         'social_media_menu_items',
-        'home_content_items',
-        'about_content_items',
-        'footer_link_items'
+        'mega_menu_items',
+        'home_exploring_items',
+        'home_featured_haors_items',
+        'home_haor_map_items',
+        'home_conservation_effects_items',
+        'home_summary_report_items',
+        'home_recreation_tourism_items',
+        'home_gallery_items',
+        'resort_page_hotel_list',
+        'footer_link_items',
+        'footer_link_items_section2'
     );
     foreach ($data as $field => $content) {
 
@@ -69,19 +77,19 @@ Route::get('/', function () {
     return view('pages.home', $data); // view('welcome');
 });
 
-Route::get('/district', function () {
+Route::get('/district/{id}', function () {
     $data = page_fields();
 
     return view('pages.district', $data);
 });
 
-Route::get('/upazila', function () {
+Route::get('/upazila/{id}', function () {
     $data = page_fields();
 
     return view('pages.upazila', $data);
 });
 
-Route::get('/haor-detail', function () {
+Route::get('/haor-detail/{id}', function () {
     $data = page_fields();
 
     return view('pages.haor-detail', $data);
