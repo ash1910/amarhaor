@@ -77,26 +77,114 @@ Route::get('/', function () {
     return view('pages.home', $data); // view('welcome');
 });
 
-Route::get('/district/{id}', function () {
+Route::get('/district/{id}', function ($id) {
     $data = page_fields();
 
-    return view('pages.district', $data);
+    $row = District::findOrFail($id);
+    $row = $row ? $row->toArray() : array();
+
+    //
+
+    $upazilas = Upazila::where('district_id', $id)->orderBy('name','asc')->select('name', 'id')->get();
+    $row['upazila_items'] = $upazilas ? $upazilas->toArray() : array();
+
+    foreach ($row['upazila_items'] as $key=>$item) {
+
+        $haors = Haor::where('upazila_id', $item['id'])->orderBy('name','asc')->select('thumb_img','area','name', 'id')->get();
+        $row['upazila_items'][$key]['haors'] = $haors ? $haors->toArray() : array();
+    }
+
+    // get previous haor
+    $prev = District::where('id', '<', $id)->orderBy('id','desc')->first();
+    if(empty($prev)){
+        $prev = District::orderBy('id','desc')->first();
+    }
+    // get next haor
+    $next = District::where('id', '>', $id)->orderBy('id','asc')->first();
+    if(empty($next)){
+        $next = District::orderBy('id','asc')->first();
+    }
+
+    //echo "<pre>";print_r($prev);exit;
+
+    $row['prev_district_id'] = $prev ? $prev->id : '';
+    $row['prev_district_name'] = $prev ? $prev->name : '';
+    $row['next_district_id'] = $next ? $next->id : '';
+    $row['next_district_name'] = $next ? $next->name : '';
+
+    return view('pages.district', array_merge($data, $row));
 });
 
-Route::get('/upazila/{id}', function () {
+Route::get('/upazila/{id}', function ($id) {
     $data = page_fields();
 
-    return view('pages.upazila', $data);
+    $row = Upazila::findOrFail($id);
+    $row = $row ? $row->toArray() : array();
+
+    $row['haor_items'] = Haor::where('upazila_id', $id)->orderBy('name','asc')->pluck('name', 'id');
+
+    // get previous haor
+    $prev = Upazila::where('id', '<', $id)->orderBy('id','desc')->first();
+    if(empty($prev)){
+        $prev = Upazila::orderBy('id','desc')->first();
+    }
+    // get next haor
+    $next = Upazila::where('id', '>', $id)->orderBy('id','asc')->first();
+    if(empty($next)){
+        $next = Upazila::orderBy('id','asc')->first();
+    }
+
+    //echo "<pre>";print_r($prev);exit;
+
+    $row['prev_upazila_id'] = $prev ? $prev->id : '';
+    $row['prev_upazila_name'] = $prev ? $prev->name : '';
+    $row['next_upazila_id'] = $next ? $next->id : '';
+    $row['next_upazila_name'] = $next ? $next->name : '';
+
+    return view('pages.upazila', array_merge($data, $row));
 });
 
-Route::get('/haor-detail/{id}', function () {
+Route::get('/haor-detail/{id}', function ($id) {
     $data = page_fields();
 
-    return view('pages.haor-detail', $data);
+    $row = Haor::findOrFail($id);
+    $row = $row ? $row->toArray() : array();
+
+    $json_fields = array(
+        'gallery_items'
+    );
+    foreach ($row as $field => $content) {
+        if(in_array($field, $json_fields) && !empty($content)){
+            $row[$field] = json_decode($content, true);
+        }
+    }
+
+    // get previous haor
+    $prev = Haor::where('id', '<', $id)->orderBy('id','desc')->first();
+    if(empty($prev)){
+        $prev = Haor::orderBy('id','desc')->first();
+    }
+    // get next haor
+    $next = Haor::where('id', '>', $id)->orderBy('id','asc')->first();
+    if(empty($next)){
+        $next = Haor::orderBy('id','asc')->first();
+    }
+
+    //echo "<pre>";print_r($prev);exit;
+
+    $row['prev_haor_id'] = $prev ? $prev->id : '';
+    $row['prev_haor_name'] = $prev ? $prev->name : '';
+    $row['next_haor_id'] = $next ? $next->id : '';
+    $row['next_haor_name'] = $next ? $next->name : '';
+
+    return view('pages.haor-detail', array_merge($data, $row));
 });
 
 Route::get('/haors', function () {
     $data = page_fields();
+
+    $data["haor_items"] = haor_list();
+    $data["total_haor"] = count($data["haor_items"]);
 
     return view('pages.haors', $data);
 });

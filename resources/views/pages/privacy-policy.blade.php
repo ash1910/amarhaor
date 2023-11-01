@@ -1,27 +1,43 @@
-@extends('layouts.default')
+@extends('layouts.home')
 @section('content')
 
-<style>
-  #compare{
-  display:none
-  }
-  .slider-container {
-    height: 550px;
-  }
-  .h2, h2 {
-    font-size: 1.5rem;
-  }
-</style>
-<section class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="heading">{{@$privacy_policy_title}}</h2>
-                {!! @$privacy_policy_content !!}
+<main id="primary" class="site-main">
+
+    <!-- start: Page Headings -->
+    <section class="page-headings page-headings-default">
+    </section>
+    <!-- end: Page Headings -->
+
+    <!-- start: Haor Overview -->
+    <section class="haor-overview">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="haor_overview_content text-center">
+              <h1 class="title">{{@$privacy_policy_title}}</h1>
             </div>
+          </div>
         </div>
-        
-    </div>
-</section>
+      </div>
+    </section>
+    <!-- end: Haor Overview -->
+
+    <!-- start: Haor Details -->
+    <section class="haor-details">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-7">
+            <div class="details_content">
+
+              {!! @$privacy_policy_content !!}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end: Haor Details -->
+
+</main>
 
 @stop

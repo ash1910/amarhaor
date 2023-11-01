@@ -134,10 +134,14 @@ class HaorCrudController extends CrudController
                 ->label('Overview')
                 ->size(12);
 
-        CRUD::field('description')
-                ->type('ckeditor')
-                ->label('Description')
-                ->size(12);
+
+
+        CRUD::addField([
+            'name' => 'description',
+            'label' => 'Description',
+            'type' => 'ckeditor',
+            'size' => 12,
+        ]);
 
         CRUD::field('about')
                 ->type('ckeditor')

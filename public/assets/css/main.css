@@ -2394,6 +2394,12 @@ START: Page Heading CSS
   background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 100%);
   z-index: -1;
 }
+
+.page-headings-default {
+  min-height: 200px;
+  background-color: var(--ss-color-theme-primary);
+}
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .page-headings {
     min-height: 500px;
@@ -3252,7 +3258,7 @@ START: Hotels CSS
 START: Haor Carousel CSS
 ----------------------------------------*/
 .haors-of-districts {
-  padding-top: 150px;
+  padding-top: 80px;
   padding-bottom: 100px;
 }
 @media (max-width: 575px), only screen and (min-width: 576px) and (max-width: 767px) {

@@ -44,13 +44,13 @@
             <h3 class="district_name">{{ @$item['name'] }}</h3>
 
             <div class="haors_carousel owl-carousel">
-            @foreach ($item ?? array() as $haor_item)
+            @foreach ($item['haors'] ?? array() as $haor_item)
               <a href="/haor-detail/{{ @$haor_item['id'] }}" class="singele_haor">
                 <div class="haor_image">
                   <img src="{{ url(@$haor_item['thumb_img'] ?? '')}}" alt="">
                 </div>
                 <div class="haor_content">
-                  <h4 class="name">{{ @$haor_item['name'] }} Haor</h4>
+                  <h4 class="name">{{ @$haor_item['name'] }}</h4>
                   <span class="area">Area: {{ @$haor_item['area'] }}</span>
                 </div>
               </a>

@@ -21,7 +21,7 @@
         "facade/ignition": "^2.3.6",
         "intervention/image": "^2.7",
         "backpack/revise-operation": "^1.0",
-        "backpack/filemanager": "^1.0",
+        "backpack/filemanager": "^1.1",
         "consoletvs/charts": "6.*",
         "laravel/legacy-factories": "^1.0",
         "mews/purifier": "^3.3"

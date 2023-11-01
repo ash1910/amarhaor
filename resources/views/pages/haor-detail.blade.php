@@ -10,7 +10,7 @@
     <div class="row">
       <div class="col">
         <div class="page_heading_content text-center">
-          <h2 class="title">{{ @$name }} Haor</h2>
+          <h2 class="title">{{ @$name }}</h2>
           <div class="page_heading_info">
             <span>Area {{ @$area }}</span>
           </div>

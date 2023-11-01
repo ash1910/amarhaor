@@ -48,8 +48,8 @@
           <div class="col-lg-10">
             <div class="haor_lists">
               <ul>
-              @foreach ($haor_items ?? array() as $item)
-                <li><a href="/haor-detail/{{ @$item['id'] }}">{{ @$item['name'] }}</a></li>
+              @foreach ($haor_items ?? array() as $id => $name)
+                <li><a href="/haor-detail/{{ @$id }}">{{ @$name }}</a></li>
               @endforeach
               </ul>
             </div>
