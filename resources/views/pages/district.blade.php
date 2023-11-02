@@ -24,8 +24,8 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <div class="section_title text-center">
-              <h3 class="title">Exploring the Haors of {{ @$name }}</h3>
+            <div class="section_title">
+              <h3 class="title text-center">Exploring the Haors of {{ @$name }}</h3>
               {!! @$description !!}
             </div>
           </div>

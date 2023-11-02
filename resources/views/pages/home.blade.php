@@ -7,8 +7,27 @@
 <section class="hero-section">
 
   <div class="hero_video_wrap" data-bg-image="{{ url(@$home_top_hero_image ?? '') }}">
-    <video src="{{@$home_top_hero_video_url}}" loop autoplay>
+    <video src="{{@$home_top_hero_video_url}}" id="topVideo" loop autoplay muted>
     </video>
+    <button class="muteVideoBtn" style="position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 10px;
+    bottom: 10px;
+    background-color: var(--ss-color-theme-primary);
+    z-index: 10;
+    border-radius: 6px;"><i class="muteVideoBtnIcon fa-light fa-volume fa-volume-mute" style="color: #fff;
+    font-weight: bold;"></i></button>
+
+    <button class="playVideoBtn" style="position: absolute;
+        width: 40px;
+        height: 40px;
+        right: 60px;
+        bottom: 10px;
+        background-color: var(--ss-color-theme-primary);
+        z-index: 10;
+        border-radius: 6px;"><i class="playVideoBtnIcon fa-light fa-pause" style="color: #fff;
+        font-weight: bold;"></i></button>
   </div>
 
   <div class="scroll_down">

@@ -223,4 +223,31 @@ Mobile Menu Js
 			},
 		});
 	});
+
+
+	$(".muteVideoBtn").click(function () {
+		let video = $("#topVideo");
+		if (video.prop('muted')) {
+			video.prop('muted', false);
+			$(".muteVideoBtnIcon").removeClass('fa-volume-mute');
+		} else {
+			video.prop('muted', true);
+			$(".muteVideoBtnIcon").addClass('fa-volume-mute');
+		}
+		console.log(video.prop('muted'))
+	});
+	$(".playVideoBtn").click(function () {
+		let video = $("#topVideo").get(0);
+		if (video.paused) {
+			video.play();
+			$(".playVideoBtnIcon").removeClass('fa-play');
+		} else {
+			video.pause();
+			$(".playVideoBtnIcon").addClass('fa-play');
+		}
+	});
+
 })(jQuery);
+
+
+

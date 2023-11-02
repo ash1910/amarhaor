@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col">
         <div class="page_heading_content text-center">
-          <h1 class="title">Haors of {{ @$name }}</h1>
+          <h1 class="title">Haors of {{ @$name }} Upazila</h1>
           <div class="page_heading_info">
             <span>Total Haors {{ @$total_haor }}</span>
             <span>Area {{ @$area }}</span>
@@ -25,8 +25,8 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <div class="section_title text-center">
-              <h3 class="title">Exploring the Haors of {{ @$name }}</h3>
+            <div class="section_title ">
+              <h3 class="title text-center">Exploring the Haors of {{ @$name }} Upazila</h3>
               {!! @$description !!}
             </div>
           </div>
@@ -40,7 +40,7 @@
         <div class="row">
           <div class="col">
             <div class="section_title text-center">
-              <h4 class="title">Haors of {{ @$name }}</h4>
+              <h4 class="title">Haors of {{ @$name }} Upazila</h4>
             </div>
           </div>
         </div>

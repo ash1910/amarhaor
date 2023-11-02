@@ -39,6 +39,14 @@ START: Theme Default CSS
   --ss-fs-h4: 24px;
   --ss-fs-h5: 20px;
   --ss-fs-h6: 18px;
+
+  --des--ss-fs-body: 16px;
+  --des--ss-fs-h1: 38px;
+  --des--ss-fs-h2: 24px;
+  --des--ss-fs-h3: 20px;
+  --des--ss-fs-h4: 18px;
+  --des--ss-fs-h5: 16px;
+  --des--ss-fs-h6: 16px;
   /**
      @Color Declaration
    */
@@ -113,6 +121,30 @@ h5 {
 
 h6 {
   font-size: var(--ss-fs-h6);
+}
+
+.details_content h1 {
+  font-size: var(--des--ss-fs-h1);
+}
+
+.details_content h2 {
+  font-size: var(--des--ss-fs-h2);
+}
+
+.details_content h3 {
+  font-size: var(--des--ss-fs-h3);
+}
+
+.details_content h4 {
+  font-size: var(--des--ss-fs-h4);
+}
+
+.details_content h5 {
+  font-size: var(--des--ss-fs-h5);
+}
+
+.details_content h6 {
+  font-size: var(--des--ss-fs-h6);
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -1529,10 +1561,12 @@ START: Exploring CSS
   padding-top: 110px;
 }
 .exploring-section .section_title {
-  max-width: 896px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+.exploring-section ul{
+  margin-left: 30px;
 }
 @media (max-width: 575px), only screen and (min-width: 576px) and (max-width: 767px) {
   .exploring-section {
@@ -2097,6 +2131,7 @@ START: Conversion Effect CSS
 .conversion_effects_item .effect_content .title {
   color: var(--ss-color-common-white);
   margin-bottom: 10px;
+  font-size: 38px;
 }
 .conversion_effects_item .effect_content p {
   color: var(--ss-color-common-white);
@@ -2959,26 +2994,33 @@ START: Sidebar CSS
   max-width: 260px;
   width: 100%;
 }
-.sidebar_widget_content:not(:last-child) {
+.sidebar_widget:not(:last-child) {
   margin-bottom: 35px;
 }
-.sidebar_widget_content .title {
+.sidebar_widget .title, .sidebar_widget h3 {
   font-size: 16px;
   text-transform: uppercase;
   font-family: var(--ss-ff-body);
   color: var(--ss-color-heading-primary);
   font-weight: var(--ss-fw-medium);
   margin-bottom: 5px;
+  margin-top: 20px;
 }
-.sidebar_widget_content p:last-child {
+.sidebar_widget h3:first-child {
+  margin-top: 0;
+}
+.sidebar_widget p {
+  margin-bottom: 2rem;
+}
+.sidebar_widget p:last-child {
   margin-bottom: 0;
 }
-.sidebar_widget_content ul {
-  margin: 0;
+.sidebar_widget ul {
+  margin: 0 0 2rem 0;
   padding: 0;
   list-style: none;
 }
-.sidebar_widget_content ul li:not(:last-child) {
+.sidebar_widget ul li:not(:last-child) {
   margin-bottom: 5px;
 }
 @media (max-width: 575px), only screen and (min-width: 576px) and (max-width: 767px), only screen and (min-width: 768px) and (max-width: 991px) {
