@@ -15,6 +15,7 @@ use App\Models\LandingPage;
 use App\Models\District;
 use App\Models\Upazila;
 use App\Models\Haor;
+use App\Models\Page;
 
 function page_fields(){
 
@@ -232,5 +233,14 @@ Route::get('/terms-of-use', function () {
     $data = page_fields();
 
     return view('pages.terms-of-use', $data);
+});
+
+Route::get('/pages/{url_title}', function ($url_title) {
+    $data = page_fields();
+
+    $row = Page::where('url_title', $url_title)->first();
+    $row = $row ? $row->toArray() : array();
+
+    return view('pages.page', array_merge($data, $row));
 });
 

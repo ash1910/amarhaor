@@ -27,4 +27,5 @@ Route::group([
 
     Route::get('upazila_model/ajax-upazila-options', 'UpazilaCrudController@upazilaOptions');
 
+    Route::crud('page', 'PageCrudController');
 }); // this should be the absolute last line of this file
