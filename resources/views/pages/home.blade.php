@@ -55,17 +55,17 @@
               <select name="thana" id="thana">
                 <option selected>Thana</option>
                 @foreach ($upazila_list ?? array() as $key => $item)
-                  <option value="{{ @$item['id'] }}" data-did="{{ @$item['district_id'] }}">{{ @$item['name'] }}</option>
+                  <!--option value="{{ @$item['id'] }}" data-did="{{ @$item['district_id'] }}">{{ @$item['name'] }}</option-->
                 @endforeach
               </select>
-              <input list="haor-list" type="text" name="haor" id="haor" placeholder="Type haor or wetland name">
+              <input list="haor-list" type="text" name="haor" id="haor" placeholder="Type haor or wetland name" autocomplete="off">
               <datalist id="haor-list">
                 @foreach ($haor_list ?? array() as $key => $item)
-                  <option data-id="{{ @$item['id'] }}" data-did="{{ @$item['district_id'] }}" data-uid="{{ @$item['upazila_id'] }}">{{ @$item['name'] }}</option>
+                  <option data-id="{{ @$item['id'] }}">{{ @$item['name'] }}</option>
                 @endforeach
               </datalist>
 
-              <button type="submit"><i class="fa-light fa-search"></i>Find</button>
+              <button type="submit" id="haor_search_form"><i class="fa-light fa-search"></i>Find</button>
             </form>
           </div>
         </div>
@@ -74,32 +74,10 @@
   </div>
 </section>
 <!-- end: Hero Section -->
-
 <script>
-// Adds a keyup listener on the input.
-input.addEventListener("keyup", (e) => {
-
-// If input value is longer or equal than 2 chars, adding "users" on ID attribute.
-if (e.target.value.length >= 2) {
-    datalist.setAttribute("id", "users");
-} else {
-    datalist.setAttribute("id", "");
-}
-});
-
-$('#myclass').on('change', function(){
-	var opt = $(this).find('option:selected');
-	$('#checkName option').prop('disabled', false);
-	if(opt.length > 0 && opt.text() != '--') {
-		$('#checkName option').prop('disabled', true);
-		$('#checkName option[value="'+opt.text()+'"]').prop('disabled', false);
-	}
-});
-
-$('#input').change(function(){
-        var abc = $("#browsers option[value='" + $('#input').val() + "']").attr('data-id');
-        alert(abc);
-    });
+  let district_list = <?php echo json_encode($district_list);?>;
+  let upazila_list = <?php echo json_encode($upazila_list);?>;
+  let haor_list = <?php echo json_encode($haor_list);?>;
 </script>
 
 <!-- start: Exploring Section -->

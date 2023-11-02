@@ -12,6 +12,7 @@
           <h1 class="title">Haors of {{ @$name }}</h1>
           <div class="page_heading_info">
             <span>Total Haors {{ @$total_haor }}</span>
+            <span>Area {{ @$area }}</span>
           </div>
         </div>
       </div>

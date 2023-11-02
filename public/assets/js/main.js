@@ -250,4 +250,77 @@ Mobile Menu Js
 })(jQuery);
 
 
+  $(document).on("change", "#district",function(e){
+    e.preventDefault();
+	$("#thana").empty();
+	$("#haor-list").empty();
+	$("#haor").val("");
+
+    let dis = $(this).val();
+	
+	if(upazila_list){
+		var upazila_list_by_dis = upazila_list.filter(obj => obj.district_id == dis);
+		options = "<option selected>Thana</option>";
+		upazila_list_by_dis.forEach(function(item) {
+			options += `<option value="${item.id}">${item.name}</option>`;
+		});
+		$("#thana").html(options).niceSelect('update');
+	}
+
+	if(haor_list){
+		var haor_list_by_dis = haor_list;
+		if(dis != "District"){
+			haor_list_by_dis = haor_list.filter(obj => obj.district_id == dis);
+		}
+		//console.log(dis)
+		
+		//console.log(haor_list_by_dis)
+		options = "";
+		haor_list_by_dis.forEach(function(item) {
+			options += `<option data-id="${item.id}">${item.name}</option>`;
+		});
+		$("#haor-list").html(options);
+	}
+  });
+
+  $(document).on("change", "#thana",function(e){
+    e.preventDefault();
+	$("#haor-list").empty();
+	$("#haor").val("");
+
+    let thana = $(this).val();
+	
+	if(haor_list){
+		var haor_list_by_upa = haor_list.filter(obj => obj.upazila_id == thana);
+		//console.log(haor_list_by_upa)
+		options = "";
+		haor_list_by_upa.forEach(function(item) {
+			options += `<option data-id="${item.id}">${item.name}</option>`;
+		});
+		$("#haor-list").html(options);
+	}
+    console.log(thana);
+  });
+
+  $(document).on("click", "#haor_search_form",function(e){
+    e.preventDefault();
+
+    let haor = $("#haor").val();
+	
+	if(haor && haor_list){
+		var haor_item = haor_list.find(obj => obj.name == haor);
+		if(haor_item){
+			location.href = "/haor-detail/"+haor_item.id;
+		}
+		else{
+			alert("It's not available");
+		}
+	}
+	else{
+		alert("Please type a Haor name");
+	}
+    console.log(haor);
+  });
+
+
 
