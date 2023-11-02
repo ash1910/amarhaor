@@ -47,13 +47,13 @@
             <form action="#" class="hero_search">
               
               <select name="district" id="district">
-                <option selected>District</option>
+                <option selected value="">District</option>
                 @foreach ($district_list ?? array() as $key => $name)
                   <option value="{{ @$key }}">{{ @$name }}</option>
                 @endforeach
               </select>
               <select name="thana" id="thana">
-                <option selected>Thana</option>
+                <option selected value="">Thana</option>
                 @foreach ($upazila_list ?? array() as $key => $item)
                   <!--option value="{{ @$item['id'] }}" data-did="{{ @$item['district_id'] }}">{{ @$item['name'] }}</option-->
                 @endforeach

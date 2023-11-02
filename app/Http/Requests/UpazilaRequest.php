@@ -26,7 +26,7 @@ class UpazilaRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:5|max:255',
+            'name' => 'required|min:3|max:255',
             'district_id' => 'required'
         ];
     }

@@ -103,7 +103,7 @@
                   <img src="/assets/images/effects/effect-2.jpg" alt="">
                 </div>
                 <div class="effect_content">
-                  <h3 class="title">Bird Sanctuary</h3>
+                  <h3 class="title" style="font-size: 38px;">Bird Sanctuary</h3>
                   <p>Brief introduction to bird sanctuaries, their importance, and their role in bird conservation.
                   </p>
                 </div>

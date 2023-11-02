@@ -2131,7 +2131,6 @@ START: Conversion Effect CSS
 .conversion_effects_item .effect_content .title {
   color: var(--ss-color-common-white);
   margin-bottom: 10px;
-  font-size: 38px;
 }
 .conversion_effects_item .effect_content p {
   color: var(--ss-color-common-white);

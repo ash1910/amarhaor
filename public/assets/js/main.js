@@ -260,7 +260,7 @@ Mobile Menu Js
 	
 	if(upazila_list){
 		var upazila_list_by_dis = upazila_list.filter(obj => obj.district_id == dis);
-		options = "<option selected>Thana</option>";
+		options = "<option selected value=''>Thana</option>";
 		upazila_list_by_dis.forEach(function(item) {
 			options += `<option value="${item.id}">${item.name}</option>`;
 		});
@@ -269,7 +269,7 @@ Mobile Menu Js
 
 	if(haor_list){
 		var haor_list_by_dis = haor_list;
-		if(dis != "District"){
+		if(dis){
 			haor_list_by_dis = haor_list.filter(obj => obj.district_id == dis);
 		}
 		//console.log(dis)
@@ -306,6 +306,8 @@ Mobile Menu Js
     e.preventDefault();
 
     let haor = $("#haor").val();
+	let thana = $("#thana").val();
+	let district = $("#district").val();
 	
 	if(haor && haor_list){
 		var haor_item = haor_list.find(obj => obj.name == haor);
@@ -315,6 +317,12 @@ Mobile Menu Js
 		else{
 			alert("It's not available");
 		}
+	}
+	else if(thana){
+		location.href = "/upazila/"+thana;
+	}
+	else if(district){
+		location.href = "/district/"+district;
 	}
 	else{
 		alert("Please type a Haor name");
