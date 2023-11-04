@@ -25,7 +25,9 @@ Route::group([
     Route::crud('upazila', 'UpazilaCrudController');
     Route::crud('haor', 'HaorCrudController');
 
+    Route::post('ckeditor/image_upload', 'LandingPageCrudController@ckeditor_image_upload')->name('upload');
     Route::get('upazila_model/ajax-upazila-options', 'UpazilaCrudController@upazilaOptions');
 
     Route::crud('page', 'PageCrudController');
+    
 }); // this should be the absolute last line of this file

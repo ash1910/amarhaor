@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\LandingPageRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /**
  * Class LandingPageCrudController
@@ -909,4 +912,30 @@ class LandingPageCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+
+    public function ckeditor_image_upload(Request $request)
+    {
+
+        if($request->hasFile('upload')) {
+
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $filenametostore = $filename.'_'.time().'.'.$extension;
+    
+            //Upload File
+            $request->file('upload')->move('uploads/images', $filenametostore);
+    
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('uploads/images/'.$filenametostore); 
+            $msg = 'Image successfully uploaded'; 
+            $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+            
+            // Render HTML output 
+            @header('Content-type: text/html; charset=utf-8'); 
+            echo $re;
+        }
+    }
+
 }
