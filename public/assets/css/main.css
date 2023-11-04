@@ -2935,6 +2935,12 @@ START: Content Details CSS
           justify-content: space-between;
   gap: 20px;
 }
+
+.details_content img {
+  max-width: 100%;
+  height: auto !important;
+}
+
 @media (max-width: 575px), only screen and (min-width: 576px) and (max-width: 767px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 1200px) and (max-width: 1399px) {
   .details_content figure {
     gap: 15px;

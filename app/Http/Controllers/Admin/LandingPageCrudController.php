@@ -636,6 +636,10 @@ class LandingPageCrudController extends CrudController
                 ->type('ckeditor')
                 ->label('Content')
                 ->tab('Statistics Page')
+                ->options([
+                    'filebrowserUploadUrl'=> route('upload', ['_token' => csrf_token() ]),
+                    'filebrowserUploadMethod'=> 'form'
+                ])
                 ->size(8);
 
         CRUD::field('statistics_page_right_content')
@@ -672,6 +676,10 @@ class LandingPageCrudController extends CrudController
                 ->type('ckeditor')
                 ->label('Content')
                 ->tab('Bird Page')
+                ->options([
+                    'filebrowserUploadUrl'=> route('upload', ['_token' => csrf_token() ]),
+                    'filebrowserUploadMethod'=> 'form'
+                ])
                 ->size(12);
 
         // -----------------
@@ -702,6 +710,10 @@ class LandingPageCrudController extends CrudController
                 ->type('ckeditor')
                 ->label('Content')
                 ->tab('Fish Page')
+                ->options([
+                    'filebrowserUploadUrl'=> route('upload', ['_token' => csrf_token() ]),
+                    'filebrowserUploadMethod'=> 'form'
+                ])
                 ->size(12);
 
         // -----------------

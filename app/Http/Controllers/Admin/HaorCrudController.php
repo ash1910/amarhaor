@@ -142,7 +142,6 @@ class HaorCrudController extends CrudController
             'type' => 'ckeditor',
             'size' => 12,
             'options'=>[
-                'extraAllowedContent'=> 'div(*)',
                 'filebrowserUploadUrl'=> route('upload', ['_token' => csrf_token() ]),
                 'filebrowserUploadMethod'=> 'form'
             ],

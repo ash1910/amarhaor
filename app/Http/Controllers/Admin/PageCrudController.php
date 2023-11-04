@@ -88,6 +88,10 @@ class PageCrudController extends CrudController
         CRUD::field('content')
                 ->type('ckeditor')
                 ->label('Description')
+                ->options([
+                    'filebrowserUploadUrl'=> route('upload', ['_token' => csrf_token() ]),
+                    'filebrowserUploadMethod'=> 'form'
+                ])
                 ->size(12);
 
         /**
