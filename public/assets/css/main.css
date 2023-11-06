@@ -2941,6 +2941,16 @@ START: Content Details CSS
   height: auto !important;
 }
 
+.haor-dep-name {
+  width: 220px;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.haor-gov-logo img {
+  max-width: 45px;
+}
+
 @media (max-width: 575px), only screen and (min-width: 576px) and (max-width: 767px), only screen and (min-width: 768px) and (max-width: 991px), only screen and (min-width: 992px) and (max-width: 1199px), only screen and (min-width: 1200px) and (max-width: 1399px) {
   .details_content figure {
     gap: 15px;
@@ -3146,6 +3156,27 @@ START: Travel Essential CSS
   margin-top: 15px;
   padding: 17px 30px;
 }
+
+.travel_essential_wrap .single_essential .essential_content a {
+  display: inline-block;
+  border: 1px solid var(--ss-color-border-1);
+  border-radius: 0;
+  padding: 14px 65px;
+  background-color: var(--ss-color-common-white);
+  font-weight: var(--ss-fw-medium);
+  font-family: var(--ss-ff-body);
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--ss-color-text-body);
+  margin-top: 15px;
+  padding: 17px 30px;
+}
+.travel_essential_wrap .single_essential .essential_content a:hover {
+  border-color: var(--ss-color-theme-primary);
+  background-color: var(--ss-color-theme-primary);
+  color: var(--ss-color-common-white);
+}
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .travel_essential_wrap .single_essential .essential_image {
     margin-bottom: 50px;
@@ -3410,6 +3441,12 @@ START: Haor Carousel CSS
   }
   .haors_of_districts_wrap .single_district .haors_carousel .owl-nav button.owl-next {
     right: 0;
+  }
+  .header-absolute .topbar_content_right .social_list {
+    display: none;
+  }
+  .header-absolute .topbar_content_right .header_lang {
+    display: none;
   }
 }
 

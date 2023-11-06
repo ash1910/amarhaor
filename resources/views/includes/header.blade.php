@@ -29,6 +29,8 @@
           <div class="topbar_content">
             <div class="topbar_content_left">
               <ul class="contact_list">
+                <li class="haor-gov-logo"><img src="/assets/images/logos/db-logo.png" alt=""></li>
+                <li class="haor-dep-name">Department of Bangladesh Haor and Wetlands Development</li>
                 <li><a href="tel:{{@$topbar_telephone}}"><i class="fa-light fa-phone"></i>{{@$topbar_telephone}}</a></li>
                 <li><a href="mailto:{{@$topbar_email}}"><i class="fa-light fa-envelope"></i>Contact us</a></li>
               </ul>

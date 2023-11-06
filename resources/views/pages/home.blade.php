@@ -316,7 +316,9 @@
         <div class="section_title">
           <h3 class="title">{{ @$home_summary_report_title }}</h3>
           <p>{{ @$home_summary_report_sub_title }}</p>
+          @if($home_summary_report_view_all_url != "")
           <a href="{{ @$home_summary_report_view_all_url }}" class="btn">VIEW ALL</a>
+          @endif
         </div>
       </div>
       <div class="col-xl-8">
@@ -328,9 +330,9 @@
                 <img src="{{ url(@$item['image'] ?? '')}}" alt="">
               </div>
               <div class="report_content">
-                <h4 class="title"><a href="#">{{ @$item['title'] }}</a></h4>
+                <h4 class="title"><a href="{{ @$item['url'] }}" target="_blank">{{ @$item['title'] }}</a></h4>
                 <p>{{ @$item['subtitle'] }}</p>
-                <a href="{{ @$item['url'] }}" class="btn-inline">DOWNLOAD <i class="fa-regular fa-arrow-right-long"></i></a>
+                <a href="{{ @$item['url'] }}" target="_blank" class="btn-inline">DOWNLOAD <i class="fa-regular fa-arrow-right-long"></i></a>
               </div>
             </div>
           </div>
