@@ -3244,6 +3244,14 @@ START: Hotels CSS
 .hotel_list_item .hotel_content .key_info li::marker {
   color: var(--ss-color-text-body);
 }
+.hotel_list_item .hotel_content h3 a {
+  margin-bottom: 15px;
+  font-size: 24px;
+  letter-spacing: -0.48px;
+}
+.hotel_list_item .hotel_content ul {
+  padding-left: 25px;
+}
 .hotel_list_item .hotel_contact {
   max-width: 315px;
   width: 100%;
@@ -3266,7 +3274,7 @@ START: Hotels CSS
   letter-spacing: -0.48px;
   margin-bottom: 30px;
 }
-.hotel_list_item .hotel_contact .phone_no {
+.hotel_list_item .hotel_contact .phone_no, .hotel_list_item .hotel_contact a {
   border: 1px solid var(--ss-color-border-1);
   display: inline-block;
   text-align: center;
@@ -3274,7 +3282,7 @@ START: Hotels CSS
   padding: 13px 35px;
   margin-bottom: 15px;
 }
-.hotel_list_item .hotel_contact .phone_no:hover {
+.hotel_list_item .hotel_contact .phone_no:hover, .hotel_list_item .hotel_contact a:hover {
   border-color: var(--ss-color-theme-primary);
   color: var(--ss-color-theme-primary);
 }

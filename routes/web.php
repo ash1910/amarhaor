@@ -184,8 +184,25 @@ Route::get('/haor-detail/{id}', function ($id) {
 Route::get('/haors', function () {
     $data = page_fields();
 
-    $data["haor_items"] = haor_list();
-    $data["total_haor"] = count($data["haor_items"]);
+    $districts = District::orderBy('id','asc')->select('name', 'id')->get();
+    $data['district_items'] = $districts ? $districts->toArray() : array();
+
+    foreach ($data['district_items'] as $key=>$item) {
+
+        $upazilas = Upazila::where('district_id', $item['id'])->orderBy('name','asc')->select('name', 'id')->get();
+        $data['district_items'][$key]['upazilas'] = $upazilas ? $upazilas->toArray() : array();
+
+        foreach ($data['district_items'][$key]['upazilas'] as $key2=>$item2) {
+
+            $haors = Haor::where('upazila_id', $item2['id'])->orderBy('name','asc')->select('thumb_img','area','name', 'id')->get();
+            $data['district_items'][$key]['upazilas'][$key2]['haors'] = $haors ? $haors->toArray() : array();
+        }
+    }
+
+    //echo "<pre>";print_r($data);exit;
+
+    //$data["haor_items"] = haor_list();
+    //$data["total_haor"] = count($data["haor_items"]);
 
     return view('pages.haors', $data);
 });
