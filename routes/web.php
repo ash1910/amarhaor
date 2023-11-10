@@ -244,3 +244,4 @@ Route::get('/pages/{url_title}', function ($url_title) {
     return view('pages.page', array_merge($data, $row));
 });
 
+
