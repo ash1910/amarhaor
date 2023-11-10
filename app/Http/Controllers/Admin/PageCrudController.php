@@ -42,7 +42,7 @@ class PageCrudController extends CrudController
         $this->crud->setHeading('All Page List');
 
         CRUD::column('title')->label('Page Title');
-        CRUD::column('URL Title')->label('Page URL Title');
+        CRUD::column('url_title')->label('Page URL Title');
 
         $this->crud->addColumns([
             [

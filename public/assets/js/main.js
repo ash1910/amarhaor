@@ -152,7 +152,7 @@ Mobile Menu Js
 	// Haor Carousel
 	if ($(".haors_carousel").length > 0) {
 		$(".haors_carousel").owlCarousel({
-			loop: true,
+			loop: $('.haors_carousel .singele_haor').size > 4 ? true:false,
 			items: 4,
 			margin: 15,
 			dots: false,

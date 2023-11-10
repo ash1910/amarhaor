@@ -29,6 +29,11 @@ class UsersTableSeeder extends Seeder
                 'email' => 'mahbub@hnsautomobiles.com',
                 'password' => \Hash::make('123456'), 
             ],
+            [
+                'name' => 'Mezbah',
+                'email' => 'mezbah@hnsautomobiles.com',
+                'password' => \Hash::make('123456'), 
+            ],
         ]);
     }
 }
