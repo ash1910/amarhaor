@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 02, 2023 at 07:19 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Host: localhost:8889
+-- Generation Time: Dec 04, 2023 at 12:51 AM
+-- Server version: 5.7.34
+-- PHP Version: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `amarhaor_db`
+-- Database: `amarhaor`
 --
 
 -- --------------------------------------------------------
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `auth_logs` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `ip_address` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `login_time` timestamp NOT NULL DEFAULT current_timestamp()
+  `login_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -45,7 +45,7 @@ CREATE TABLE `districts` (
   `area` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `total_haor` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `header_img` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -71,8 +71,36 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `galleries`
+--
+
+CREATE TABLE `galleries` (
+  `id` int(6) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `image` varchar(100) DEFAULT NULL,
+  `gallery_category_id` int(6) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gallery_categories`
+--
+
+CREATE TABLE `gallery_categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -89,10 +117,10 @@ CREATE TABLE `haors` (
   `thumb_img` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `thumb_img_big` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `header_img` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `overview` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `about` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `gallery_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`gallery_items`)),
+  `overview` text COLLATE utf8_unicode_ci,
+  `about` text COLLATE utf8_unicode_ci,
+  `description` text COLLATE utf8_unicode_ci,
+  `gallery_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -116,72 +144,72 @@ INSERT INTO `haors` (`id`, `district_id`, `upazila_id`, `name`, `area`, `thumb_i
 CREATE TABLE `landing_pages` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `topbar_logo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `topbar_menu_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`topbar_menu_items`)),
-  `social_media_menu_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`social_media_menu_items`)),
+  `topbar_menu_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `social_media_menu_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `topbar_telephone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `topbar_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `mega_menu_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`mega_menu_items`)),
+  `mega_menu_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `home_top_hero_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `home_top_hero_text` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `home_top_hero_image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `home_top_hero_video_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `home_exploring_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `home_exploring_text` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `home_exploring_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`home_exploring_items`)),
+  `home_exploring_text` text COLLATE utf8_unicode_ci,
+  `home_exploring_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `home_statistics_total_haors` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `home_statistics_total_area` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `home_statistics_total_projects` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `home_featured_haors_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `home_featured_haors_sub_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `home_featured_haors_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`home_featured_haors_items`)),
+  `home_featured_haors_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `home_featured_haors_view_all_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `home_haor_map_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `home_haor_map_text` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `home_haor_map_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`home_haor_map_items`)),
+  `home_haor_map_text` text COLLATE utf8_unicode_ci,
+  `home_haor_map_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `home_conservation_effects_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `home_conservation_effects_text` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `home_conservation_effects_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`home_conservation_effects_items`)),
+  `home_conservation_effects_text` text COLLATE utf8_unicode_ci,
+  `home_conservation_effects_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `home_summary_report_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `home_summary_report_sub_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `home_summary_report_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`home_summary_report_items`)),
+  `home_summary_report_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `home_summary_report_view_all_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `home_recreation_tourism_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `home_recreation_tourism_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`home_recreation_tourism_items`)),
-  `home_gallery_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`home_gallery_items`)),
+  `home_recreation_tourism_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `home_gallery_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `statistics_page_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `statistics_page_header_image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `statistics_page_overview` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `statistics_page_content` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `statistics_page_right_content` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `statistics_page_content` text COLLATE utf8_unicode_ci,
+  `statistics_page_right_content` text COLLATE utf8_unicode_ci,
   `travel_page_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `travel_page_header_image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `travel_page_how_to_go_content` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `travel_page_how_to_go_content` text COLLATE utf8_unicode_ci,
   `travel_page_how_to_go_image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `travel_page_where_to_stay_content` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `travel_page_where_to_stay_content` text COLLATE utf8_unicode_ci,
   `travel_page_where_to_stay_image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `resort_page_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `resort_page_header_image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `resort_page_hotel_list` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`resort_page_hotel_list`)),
+  `resort_page_hotel_list` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   `bird_page_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `bird_page_header_image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `bird_page_overview` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `bird_page_content` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bird_page_content` text COLLATE utf8_unicode_ci,
   `fish_page_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fish_page_header_image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fish_page_overview` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `fish_page_content` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fish_page_content` text COLLATE utf8_unicode_ci,
   `cookie_policy_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cookie_policy_content` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cookie_policy_content` text COLLATE utf8_unicode_ci,
   `privacy_policy_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `privacy_policy_content` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `privacy_policy_content` text COLLATE utf8_unicode_ci,
   `terms_conditions_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `terms_conditions_content` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `terms_conditions_content` text COLLATE utf8_unicode_ci,
   `footer_logo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `footer_text` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `footer_contact_address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `footer_link_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`footer_link_items`)),
-  `footer_link_items_section2` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`footer_link_items_section2`)),
-  `footer_copyright_text` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `footer_link_items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `footer_link_items_section2` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `footer_copyright_text` text COLLATE utf8_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -217,7 +245,24 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (66, '2021_12_02_054840_create_landing_pages_table', 1),
 (67, '2023_10_14_194511_create_districts_table', 1),
 (68, '2023_10_14_194550_create_upazilas_table', 1),
-(69, '2023_10_14_194552_create_haors_table', 1);
+(69, '2023_10_14_194552_create_haors_table', 1),
+(70, '2023_11_02_115758_create_pages_table', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pages`
+--
+
+CREATE TABLE `pages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `url_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `header_image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -234,6 +279,431 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rivers`
+--
+
+CREATE TABLE `rivers` (
+  `id` int(6) NOT NULL,
+  `region` varchar(32) DEFAULT NULL,
+  `name` varchar(64) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `rivers`
+--
+
+INSERT INTO `rivers` (`id`, `region`, `name`, `created_at`, `updated_at`) VALUES
+(2, 'North West Region', 'Akhira-Maccha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(3, 'North West Region', 'Atrai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(4, 'North West Region', 'Atrai (Dinajpur) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(5, 'North West Region', 'Atrai (Naogaon-Natore)* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(6, 'North West Region', 'Atrai (Pabna) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(7, 'North West Region', 'Alai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(8, 'North West Region', 'Alai Kumari (Burail) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(9, 'North West Region', 'Ichamati (Dinajpur) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(10, 'North West Region', 'Ichamati (Pabna) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(11, 'North West Region', 'Ichamati (Bogra) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(12, 'North West Region', 'Ichamati (Bogra-Sirajganj) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(13, 'North West Region', 'Iramati ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(14, 'North West Region', 'Karatoya* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(15, 'North West Region', 'Karatoya (Nilphamari) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(16, 'North West Region', 'Kageshwari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(17, 'North West Region', 'Katakhali (Gaibandha) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(18, 'North West Region', 'Kala ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(19, 'North West Region', 'Kalapani ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(20, 'North West Region', 'Kaludaha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(21, 'North West Region', 'Kumlal-Nautara ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(22, 'North West Region', 'Kurum ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(23, 'North West Region', 'Kulik* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(24, 'North West Region', 'Khar Kharia-Tilai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(25, 'North West Region', 'Khalsadingi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(26, 'North West Region', 'Gadai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(27, 'North West Region', 'Gaveshwari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(28, 'North West Region', 'Ganges (Padma)* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(29, 'North West Region', 'Gangnai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(30, 'North West Region', 'Gidari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(31, 'North West Region', 'Girai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(32, 'North West Region', 'Guksi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(33, 'North West Region', 'Gobra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(34, 'North West Region', 'Gohala ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(35, 'North West Region', 'Garaiya Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(36, 'North West Region', 'Ghaghat ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(37, 'North West Region', 'Ghirnai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(38, 'North West Region', 'Ghoramara* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(39, 'North West Region', 'Chawai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(40, 'North West Region', 'Chiknai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(41, 'North West Region', 'Chikli ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(42, 'North West Region', 'Ciri ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(43, 'North West Region', 'Chhiri ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(44, 'North West Region', 'Chungabhanga ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(45, 'North West Region', 'Satnai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(46, 'North West Region', 'Choto Dhepa ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(47, 'North West Region', 'Choto Jamuna ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(48, 'North West Region', 'Choto Sinua ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(49, 'North West Region', 'Tangon* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(50, 'North West Region', 'Dahuk* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(51, 'North West Region', 'Dhepa ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(52, 'North West Region', 'Talma* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(53, 'North West Region', 'Teesta* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(54, 'North West Region', 'Teesta (Panchagarh) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(55, 'North West Region', 'Tirnai (Thakurgaon) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(56, 'North West Region', 'Tirnai (Panchagarh) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(57, 'North West Region', 'Tulshi Ganga ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(58, 'North West Region', 'Dudhkumar* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(59, 'North West Region', 'Deonai-Charalkata-Jamuneshwari* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(60, 'North West Region', 'Dharla* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(61, 'North West Region', 'Dhaijan ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(62, 'North West Region', 'Dhum ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(63, 'North West Region', 'Narth ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(64, 'North West Region', 'Nalshisa ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(65, 'North West Region', 'Naleya ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(66, 'North West Region', 'Nagar Upper* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(67, 'North West Region', 'Nagar Lower (Bogra-Natore) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(68, 'North West Region', 'Narode ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(69, 'North West Region', 'Palimari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(70, 'North West Region', 'Pagla* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(71, 'North West Region', 'Patharghata ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(72, 'North West Region', 'Pathraj ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(73, 'North West Region', 'Punarbhaba* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(74, 'North West Region', 'Petki ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(75, 'North West Region', 'Fakirni ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(76, 'North West Region', 'Phulkumar ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(77, 'North West Region', 'Brahmaputra-Jamuna* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(78, 'North West Region', 'Baral Upper (Baral-Nandakuja) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(79, 'North West Region', 'Baral Lower (Pabna) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(80, 'North West Region', 'Bangali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(81, 'North West Region', 'Badai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(82, 'North West Region', 'Barnai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(83, 'North West Region', 'Banni ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(84, 'North West Region', 'Burail ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(85, 'North West Region', 'Bullai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(86, 'North West Region', 'Burikhora ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(87, 'North West Region', 'Buri Teesta* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(88, 'North West Region', 'Berong ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(89, 'North West Region', 'Belan ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(90, 'North West Region', 'Besani ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(91, 'North West Region', 'Borka ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(92, 'North West Region', 'Bhadai (Bogra) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(93, 'North West Region', 'Bhulli ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(94, 'North West Region', 'Versha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(95, 'North West Region', 'Mahananda Upper (Panchagarh)* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(96, 'North West Region', 'Mahananda Lower (Nawabganj) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(97, 'North West Region', 'Maila ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(98, 'North West Region', 'Maldaha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(99, 'North West Region', 'Musakhan ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(100, 'North West Region', 'Monas ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(101, 'North West Region', 'Jamuna (Panchagarh) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(102, 'North West Region', 'Ratnai (Lalmonirhat) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(103, 'North West Region', 'Ramchandi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(104, 'North West Region', 'Rakhasini-Tetulia (Tulai)* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(105, 'North West Region', 'Lenga ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(106, 'North West Region', 'Lona ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(107, 'North West Region', 'Shib ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(108, 'North West Region', 'Sati-Sarnamati-Bhateshwari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(109, 'North West Region', 'Shemlajan ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(110, 'North West Region', 'Shirmakhali Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(111, 'North West Region', 'Singimari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(112, 'North West Region', 'Sui ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(113, 'North West Region', 'Sinua ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(114, 'North West Region', 'Shoz ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(115, 'North West Region', 'Harabati ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(116, 'North West Region', 'Hura Sagor ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(117, 'North Central Region', 'Aiman-Akhila ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(118, 'North Central Region', 'Aiman-Mobari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(119, 'North Central Region', 'Arial Khan (Narsingdi) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(120, 'North Central Region', 'Ichamati (Manikganj) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(121, 'North Central Region', 'Ichamati (Serajdikhan) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(122, 'North Central Region', 'Ilishmari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(123, 'North Central Region', 'Alongjani ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(124, 'North Central Region', 'Katakhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(125, 'North Central Region', 'Kaliganga (Manikganj) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(126, 'North Central Region', 'Khiro (Trishal) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(127, 'North Central Region', 'Khiro (Bhaluka) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(128, 'North Central Region', 'Gangdubi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(129, 'North Central Region', 'Gazikhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(130, 'North Central Region', 'Goallar Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(131, 'North Central Region', 'Chatal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(132, 'North Central Region', 'Chapai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(133, 'North Central Region', 'Chilai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(134, 'North Central Region', 'Joypara Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(135, 'North Central Region', 'Jharkata ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(136, 'North Central Region', 'Jinjiram* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(137, 'North Central Region', 'Jhinai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(138, 'North Central Region', 'Tungi Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(139, 'North Central Region', 'Tanki Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(140, 'North Central Region', 'Taltala Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(141, 'North Central Region', 'Turag ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(142, 'North Central Region', 'Tulashikhali Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(143, 'North Central Region', 'Dhaleswari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(144, 'North Central Region', 'Nagda Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(145, 'North Central Region', 'Nangla ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(146, 'North Central Region', 'Naljuri Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(147, 'North Central Region', 'Nangli ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(148, 'North Central Region', 'Padma ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(149, 'North Central Region', 'Pagaria-Shila ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(150, 'North Central Region', 'Paruli Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(151, 'North Central Region', 'Paharia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(152, 'North Central Region', 'Old Dhaleswari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(153, 'North Central Region', 'Old Brahmaputra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(154, 'North Central Region', 'Pungli ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(155, 'North Central Region', 'Bangshi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(156, 'North Central Region', 'Bangshi (Savar) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(157, 'North Central Region', 'Brahmaputra (Narsingdi-Munshiganj) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(158, 'North Central Region', 'Baksatra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(159, 'North Central Region', 'Bajja-Medhua ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(160, 'North Central Region', 'Banar Upper ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(161, 'North Central Region', 'Banar Lower ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(162, 'North Central Region', 'Balu ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(163, 'North Central Region', 'Buriganga ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(164, 'North Central Region', 'Bairan ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(165, 'North Central Region', 'Boshkhalir Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(166, 'North Central Region', 'Mora Jinjiram ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(167, 'North Central Region', 'Mahari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(168, 'North Central Region', 'Menikhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(169, 'North Central Region', 'Labundha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(170, 'North Central Region', 'Louhajang ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(171, 'North Central Region', 'Sitalakhya ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(172, 'North Central Region', 'Saldha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(173, 'North Central Region', 'Suti ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(174, 'North Central Region', 'Sutia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(175, 'North Central Region', 'Sonakhali Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(176, 'North Central Region', 'Hai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(177, 'North Central Region', 'Haridoya ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(178, 'North East Region', 'Atrakhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(179, 'North East Region', 'Abua (Nandia Gang) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(180, 'North East Region', 'Amri Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(181, 'North East Region', 'Isdhar Khal-Barbhanga ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(182, 'North East Region', 'Updakhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(183, 'North East Region', 'Umiyam* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(184, 'North East Region', 'Karnajhora ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(185, 'North East Region', 'Kharno-Balja* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(186, 'North East Region', 'Koris ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(187, 'North East Region', 'Kacha Matia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(188, 'North East Region', 'Kapna ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(189, 'North East Region', 'Kamarkhal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(190, 'North East Region', 'Kamarkhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(191, 'North East Region', 'Kaldahar-Kanyakul ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(192, 'North East Region', 'Kalni ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(193, 'North East Region', 'Kalapani Jhora ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(194, 'North East Region', 'Kushiyara* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(195, 'North East Region', 'Korangi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(196, 'North East Region', 'Khazenchi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(197, 'North East Region', 'Khasimara ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(198, 'North East Region', 'Khepa ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(199, 'North East Region', 'Khowai* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(200, 'North East Region', 'Gumai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(201, 'North East Region', 'Ghagtia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(202, 'North East Region', 'Ghanura-Bagala (Bukha) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(203, 'North East Region', 'Ghora Utra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(204, 'North East Region', 'Chamti ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(205, 'North East Region', 'Chitalkhali* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(206, 'North East Region', 'Chela ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(207, 'North East Region', 'Jaflong-Dauki ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(208, 'North East Region', 'Jalia Chara (Bholaganj) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(209, 'North East Region', 'Jalukhali (Chalti)* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(210, 'North East Region', 'Juri* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(211, 'North East Region', 'Dauka ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(212, 'North East Region', 'Dhala* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(213, 'North East Region', 'Dudhda ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(214, 'North East Region', 'Dolta ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(215, 'North East Region', 'Dhanu ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(216, 'North East Region', 'Dhalai-Bishnai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(217, 'North East Region', 'Dhalai (Maulvibazar)* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(218, 'North East Region', 'Nokla-Sundrakasi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(219, 'North East Region', 'Narasunda ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(220, 'North East Region', 'Naljur ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(221, 'North East Region', 'Noya Gang (Khasiamara)* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(222, 'North East Region', 'Naya Gang (Jaintiapur) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(223, 'North East Region', 'Netai* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(224, 'North East Region', 'Patnai Paikartala ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(225, 'North East Region', 'Pabijuri-Kusi Gang-Kusiya ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(226, 'North East Region', 'Piyain (Sylhet-Sunamganj)* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(227, 'North East Region', 'Piyain (Sunamganj-Netrakona) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(228, 'North East Region', 'Old Surma ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(229, 'North East Region', 'Pora Khal-Khaiya ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(230, 'North East Region', 'Botor Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(231, 'North East Region', 'Bar Gang ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(232, 'North East Region', 'Baulai (Balua) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(233, 'North East Region', 'Bathail ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(234, 'North East Region', 'Baloi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(235, 'North East Region', 'Bijna-Guinggajuri ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(236, 'North East Region', 'Bibiana ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(237, 'North East Region', 'Bekra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(238, 'North East Region', 'Betair ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(239, 'North East Region', 'Bedori Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(240, 'North East Region', 'Bhabna-Bashia-Bahia Gang ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(241, 'North East Region', 'Bhogai Kangsho* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(242, 'North East Region', 'Magra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(243, 'North East Region', 'Manu* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(244, 'North East Region', 'Mora Surma ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(245, 'North East Region', 'Moharoshi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(246, 'North East Region', 'Mohasingh ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(247, 'North East Region', 'Malijhi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(248, 'North East Region', 'Mirgi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(249, 'North East Region', 'Jadukata-Rakti* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(250, 'North East Region', 'Lungla* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(251, 'North East Region', 'Lain ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(252, 'North East Region', 'Lauranjani ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(253, 'North East Region', 'Lubha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(254, 'North East Region', 'Saiduli-Baruni ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(255, 'North East Region', 'Satar Khali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(256, 'North East Region', 'Sari Gowain* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(257, 'North East Region', 'Sinai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(258, 'North East Region', 'Singua ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(259, 'North East Region', 'Sutang* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(260, 'North East Region', 'Surma ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(261, 'North East Region', 'Sonai-Bordal* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(262, 'North East Region', 'Someswari* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(263, 'North East Region', 'Someswari (Dharmapasha) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(264, 'North East Region', 'Someswari (Sreebardi-Jhenaigati) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(265, 'Eastern Hills Region', 'Ichamati (Rangamati) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(266, 'Eastern Hills Region', 'Eidgoan ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(267, 'Eastern Hills Region', 'Karnafuli ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(268, 'Eastern Hills Region', 'Kasalang ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(269, 'Eastern Hills Region', 'Chingri (Chengi) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(270, 'Eastern Hills Region', 'Dolu Khal-Tankabati Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(271, 'Eastern Hills Region', 'Naf* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(272, 'Eastern Hills Region', 'Bura Matamuhuri ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(273, 'Eastern Hills Region', 'Bakkhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(274, 'Eastern Hills Region', 'Bharuakhali Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(275, 'Eastern Hills Region', 'Bholakhal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(276, 'Eastern Hills Region', 'Maini ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(277, 'Eastern Hills Region', 'Matamuhuri* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(278, 'Eastern Hills Region', 'Rangkhaing ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(279, 'Eastern Hills Region', 'Sangu* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(280, 'Eastern Hills Region', 'Halda ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(281, 'South East Region', 'Arsi-Nalia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(282, 'South East Region', 'Kakri* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(283, 'South East Region', 'Kasti ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(284, 'South East Region', 'Gomti* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(285, 'South East Region', 'Ghungghur ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(286, 'South East Region', 'Little Feni ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(287, 'South East Region', 'Dakatia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(288, 'South East Region', 'Dasadia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(289, 'South East Region', 'Titas ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(290, 'South East Region', 'Titas (Narsingdi Sadar-Bancharampur) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(291, 'South East Region', 'Dhanagoda ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(292, 'South East Region', 'Feni* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(293, 'South East Region', 'Bijni* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(294, 'South East Region', 'Buri ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(295, 'South East Region', 'Vulua ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(296, 'South East Region', 'Mahuri* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(297, 'South East Region', 'Meghna (Upper) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(298, 'South East Region', 'Meghna (Lower) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(299, 'South East Region', 'Lahar ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(300, 'South East Region', 'Longon Bolvodra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(301, 'South East Region', 'Salda* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(302, 'South East Region', 'Selonia* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(303, 'South East Region', 'Sonai* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(304, 'South East Region', 'Hawra* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(305, 'South West Region', 'Atharbanki ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(306, 'South West Region', 'Arial Khan ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(307, 'South West Region', 'Atai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(308, 'South West Region', 'Andarmanick ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(309, 'South West Region', 'Afra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(310, 'South West Region', 'Arpangasia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(311, 'South West Region', 'Ichamati-Kalindi* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(312, 'South West Region', 'Kacha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(313, 'South West Region', 'Kapotakshi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(314, 'South West Region', 'Kumar (Chuadanga) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(315, 'South West Region', 'Kumar (Faridpur-Gopalganj) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(316, 'South West Region', 'Kumar (Upper) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(317, 'South West Region', 'Kumar (Lower) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(318, 'South West Region', 'Koyra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(319, 'South West Region', 'Karulia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(320, 'South West Region', 'Kankshiali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(321, 'South West Region', 'Kazibacha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(322, 'South West Region', 'Katakhali (Narail) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(323, 'South West Region', 'Katakhal (Tungipara) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(324, 'South West Region', 'Kaliganga (Pirojpur) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(325, 'South West Region', 'Kirtonkhola ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(326, 'South West Region', 'Khairabad ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(327, 'South West Region', 'Kholpetua ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(328, 'South West Region', 'Garai ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(329, 'South West Region', 'Gunkhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(330, 'South West Region', 'Galghasia (Gutia Khali) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(331, 'South West Region', 'Gulisakhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(332, 'South West Region', 'Ghagar ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(333, 'South West Region', 'Ghasiakhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(334, 'South West Region', 'Chatra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(335, 'South West Region', 'Chunkuri ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(336, 'South West Region', 'Chandana-Barasia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(337, 'South West Region', 'Chatkhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(338, 'South West Region', 'Chitra (Chuadanga) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(339, 'South West Region', 'Jhap Jhapia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(340, 'South West Region', 'Tarki ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(341, 'South West Region', 'Tiakhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(342, 'South West Region', 'Dhaki ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(343, 'South West Region', 'Tetulia (Barisal) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(344, 'South West Region', 'Teliganga-Ghengrail ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(345, 'South West Region', 'Daratana-Poylahara ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(346, 'South West Region', 'Darir Gang ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(347, 'South West Region', 'Deluti ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(348, 'South West Region', 'Nunda-Otra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(349, 'South West Region', 'Nabaganga ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(350, 'South West Region', 'Naria Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(351, 'South West Region', 'Nehalganj-Rangmatia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(352, 'South West Region', 'Patuakhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(353, 'South West Region', 'Putimari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(354, 'South West Region', 'Old Passur ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(355, 'South West Region', 'Passur ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(356, 'South West Region', 'Pandab ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(357, 'South West Region', 'Panguchhi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(358, 'South West Region', 'Palang ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(359, 'South West Region', 'Fatki ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(360, 'South West Region', 'Bogi ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(361, 'South West Region', 'Burirswar-Payra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(362, 'South West Region', 'Baleswar ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(363, 'South West Region', 'Badurgachha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(364, 'South West Region', 'Bishkhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(365, 'South West Region', 'Bisarkand-Bagda Khal ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(366, 'South West Region', 'Bishnu-Kumarkhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(367, 'South West Region', 'Begabati ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(368, 'South West Region', 'Betna* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(369, 'South West Region', 'Belua ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(370, 'South West Region', 'Bhadra ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(371, 'South West Region', 'Bhubaneswar ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(372, 'South West Region', 'Bhairab ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(373, 'South West Region', 'Bhairab (Bagerhat)* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(374, 'South West Region', 'Bhairab-Kobadak ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(375, 'South West Region', 'Bhola (Bagerhat) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(376, 'South West Region', 'Mongla ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(377, 'South West Region', 'Mukteshwari Teka ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(378, 'South West Region', 'Madhumati ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(379, 'South West Region', 'Morirchap-Labangabati ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(380, 'South West Region', 'Mathabhanga* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(381, 'South West Region', 'Madar Gang ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(382, 'South West Region', 'Madaripur Bil Route ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(383, 'South West Region', 'Malancha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(384, 'South West Region', 'Minaj ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(385, 'South West Region', 'Rupsa (Khulna) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(386, 'South West Region', 'Rabnabad ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(387, 'South West Region', 'Raimangal* ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(388, 'South West Region', 'Lohalia ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(389, 'South West Region', 'Sakbaria ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(390, 'South West Region', 'Satla-Harta-Natherkanda ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(391, 'South West Region', 'Saildaha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(392, 'South West Region', 'Sibsa ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(393, 'South West Region', 'Solmari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(394, 'South West Region', 'Sugandha ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(395, 'South West Region', 'Shaynda ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(396, 'South West Region', 'Soya-Harinbhanga ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(397, 'South West Region', 'Shapmara-Habra (Khutikkhali) ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(398, 'South West Region', 'Salta ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(399, 'South West Region', 'Sirajpur Haor ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(400, 'South West Region', 'Hari ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(401, 'South West Region', 'Harihar ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(402, 'South West Region', 'Hamkura ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(403, 'South West Region', 'Haria ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(404, 'South West Region', 'Haparkhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(405, 'South West Region', 'Habarkhali ', '2023-12-03 03:59:33', '2023-12-03 03:59:33'),
+(406, 'South West Region', 'Hisna-Jhanja ', '2023-12-03 03:59:33', '2023-12-03 03:59:33');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `upazilas`
 --
 
@@ -244,7 +714,7 @@ CREATE TABLE `upazilas` (
   `area` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `total_haor` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `header_img` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -308,6 +778,18 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `galleries`
+--
+ALTER TABLE `galleries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `gallery_categories`
+--
+ALTER TABLE `gallery_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `haors`
 --
 ALTER TABLE `haors`
@@ -328,10 +810,22 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pages`
+--
+ALTER TABLE `pages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `rivers`
+--
+ALTER TABLE `rivers`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `upazilas`
@@ -370,6 +864,18 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `galleries`
+--
+ALTER TABLE `galleries`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `gallery_categories`
+--
+ALTER TABLE `gallery_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `haors`
 --
 ALTER TABLE `haors`
@@ -385,7 +891,19 @@ ALTER TABLE `landing_pages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+
+--
+-- AUTO_INCREMENT for table `pages`
+--
+ALTER TABLE `pages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rivers`
+--
+ALTER TABLE `rivers`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=407;
 
 --
 -- AUTO_INCREMENT for table `upazilas`
