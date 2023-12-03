@@ -16,6 +16,7 @@ use App\Models\District;
 use App\Models\Upazila;
 use App\Models\Haor;
 use App\Models\Page;
+use App\Models\River;
 
 function page_fields(){
 
@@ -259,4 +260,17 @@ Route::get('/pages/{url_title}', function ($url_title) {
     $row = $row ? $row->toArray() : array();
 
     return view('pages.page', array_merge($data, $row));
+});
+
+Route::get('/rivers', function () {
+    $data = page_fields();
+
+    $rivers = River::orderBy('id','asc')->get();
+    $data['rivers'] = $rivers ? $rivers->toArray() : array();
+
+    foreach ($data['rivers'] as $key=>$item) {
+        $data['rivers'][$key]['river_items'] = json_decode($item['river_items'], true);
+    }
+
+    return view('pages.river', $data);
 });

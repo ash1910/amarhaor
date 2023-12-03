@@ -48,3 +48,4 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('upazila') }}'><i class='nav-icon la la-files-o'></i> Upazilas</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('haor') }}'><i class='nav-icon la la-files-o'></i> Haors</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('page') }}'><i class='nav-icon la la-files-o'></i> Pages</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('river') }}'><i class='nav-icon la la-files-o'></i> Rivers</a></li>

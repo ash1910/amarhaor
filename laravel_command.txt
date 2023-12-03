@@ -33,13 +33,11 @@ php artisan migrate:refresh --seed
 php artisan db:seed
 php artisan db:seed --class=UsersTableSeeder
 
-
 php artisan make:controller PostsController --resource
 php artisan make:controller PostsController
 php artisan make:resource PostsCollection
 
 php artisan make:seeder UsersTableSeeder
-
 
 php artisan passport:install --force
 
@@ -49,5 +47,8 @@ sudo chmod -R o+rw storage
 which php
 sudo nano ~/.bash_profile
 
-
+// NEW CRUD in LARAVEL BACKBACK
+php artisan make:migration:schema create_tags_table
+php artisan migrate
+php artisan backpack:crud tag
 
