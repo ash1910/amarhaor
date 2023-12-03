@@ -267,10 +267,6 @@ Route::get('/rivers', function () {
 
     $rivers = River::orderBy('id','asc')->get();
     $data['rivers'] = $rivers ? $rivers->toArray() : array();
-
-    foreach ($data['rivers'] as $key=>$item) {
-        $data['rivers'][$key]['river_items'] = json_decode($item['river_items'], true);
-    }
-
+    //echo "<pre>";print_r($data);exit;
     return view('pages.river', $data);
 });

@@ -39,9 +39,10 @@ class RiverCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->crud->setHeading('All River\'s Region List');
+        $this->crud->setHeading('All River List');
 
-        CRUD::column('title');
+        CRUD::column('region');
+        CRUD::column('name');
     }
 
     /**
@@ -55,34 +56,28 @@ class RiverCrudController extends CrudController
         CRUD::setValidation(RiverRequest::class);
         CRUD::setOperationSetting('contentClass', 'col-md-12 bold-labels');
 
-        CRUD::field('title')
+        CRUD::addField([
+            'name' => 'region',
+            'label' => 'Region',
+            'type' => 'select_from_array',
+            'options' => [
+                "North West Region" => "North West Region", 
+                "North Central Region" => "North Central Region", 
+                "North East Region" => "North East Region", 
+                "Eastern Hills Region" => "Eastern Hills Region", 
+                "South East Region" => "South East Region", 
+                "South West Region" => "South West Region", 
+            ],
+            'allows_null' => false,
+            'wrapper' => [
+                'class' => 'col-md-4',
+            ],
+        ]);
+
+        CRUD::field('name')
                 ->type('text')
-                ->label('Page Title')
-                ->size(3);
-
-        CRUD::field('header_image')
-                ->type('image')
-                ->label('Thumb Image')
-                ->upload(true)
-                ->disk('public')
-                ->size(3);
-
-        CRUD::field('content')
-                ->type('ckeditor')
-                ->label('Description')
-                ->options([
-                    'filebrowserUploadUrl'=> route('upload', ['_token' => csrf_token() ]),
-                    'filebrowserUploadMethod'=> 'form'
-                ])
-                ->size(6);
-
-        CRUD::field('river_items')
-                ->type('table')
-                ->label('River List')
-                ->columns([
-                    'text'  => 'Name'
-                ])
-                ->size(6);
+                ->label('River Name')
+                ->size(8);
     }
 
     /**

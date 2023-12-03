@@ -15,10 +15,8 @@ class CreateRiversTable extends Migration
         Schema::create('rivers', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('title')->nullable();
-            $table->string('header_image')->nullable();
-            $table->text('content')->nullable();
-            $table->json('river_items')->nullable();
+            $table->string('region')->nullable();
+            $table->text('name')->nullable();
             
             $table->timestamps();
         });
