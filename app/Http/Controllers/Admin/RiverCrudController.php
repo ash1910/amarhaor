@@ -43,6 +43,8 @@ class RiverCrudController extends CrudController
 
         CRUD::column('region');
         CRUD::column('name');
+
+        $this->crud->denyAccess('show');
     }
 
     /**
