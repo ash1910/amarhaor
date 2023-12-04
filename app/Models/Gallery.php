@@ -77,7 +77,8 @@ class Gallery extends Model
 
         if (Str::startsWith($value, 'data:image'))
         {
-            $extension = explode('/', mime_content_type($value))[1];
+            $extension = 'jpg'; //explode('/', mime_content_type($value))[1];
+            
             $image = \Image::make($value)->encode($extension, 90);
             $filename = md5($value.time()).'.'.$extension;
 
