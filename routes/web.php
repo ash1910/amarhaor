@@ -68,18 +68,66 @@ function haor_list(){
     return $data;
 }
 
-Route::get('/', function () {
+function haor_detail($id){
+
     $data = page_fields();
 
-    $data["district_list"] = district_list();
-    $data["upazila_list"] = upazila_list();
-    $data["haor_list"] = haor_list();
-    
-    //echo "<pre>";print_r($data);exit;
-    return view('pages.home', $data); // view('welcome');
-});
+    $row = Haor::findOrFail($id);
+    $row = $row ? $row->toArray() : array();
 
-Route::get('/district/{id}', function ($id) {
+    $json_fields = array(
+        'gallery_items'
+    );
+    foreach ($row as $field => $content) {
+        if(in_array($field, $json_fields) && !empty($content)){
+            $row[$field] = json_decode($content, true);
+        }
+    }
+
+    // get previous haor
+    $prev = Haor::where('id', '<', $id)->orderBy('id','desc')->first();
+    if(empty($prev)){
+        $prev = Haor::orderBy('id','desc')->first();
+    }
+    // get next haor
+    $next = Haor::where('id', '>', $id)->orderBy('id','asc')->first();
+    if(empty($next)){
+        $next = Haor::orderBy('id','asc')->first();
+    }
+
+    //echo "<pre>";print_r($prev);exit;
+
+    $row['prev_haor_id'] = $prev ? $prev->id : '';
+    $row['prev_haor_name'] = $prev ? $prev->name : '';
+    $row['next_haor_id'] = $next ? $next->id : '';
+    $row['next_haor_name'] = $next ? $next->name : '';
+
+    return array_merge($data, $row);
+}
+
+function haors(){
+    $data = page_fields();
+
+    $districts = District::orderBy('id','asc')->select('name', 'id')->get();
+    $data['district_items'] = $districts ? $districts->toArray() : array();
+
+    foreach ($data['district_items'] as $key=>$item) {
+
+        $upazilas = Upazila::where('district_id', $item['id'])->orderBy('name','asc')->select('name', 'id')->get();
+        $data['district_items'][$key]['upazilas'] = $upazilas ? $upazilas->toArray() : array();
+
+        foreach ($data['district_items'][$key]['upazilas'] as $key2=>$item2) {
+
+            $haors = Haor::where('upazila_id', $item2['id'])->orderBy('name','asc')->select('thumb_img','area','name', 'id')->get();
+            $data['district_items'][$key]['upazilas'][$key2]['haors'] = $haors ? $haors->toArray() : array();
+        }
+    }
+
+    return $data;
+}
+
+function district($id){
+
     $data = page_fields();
 
     $row = District::findOrFail($id);
@@ -114,10 +162,11 @@ Route::get('/district/{id}', function ($id) {
     $row['next_district_id'] = $next ? $next->id : '';
     $row['next_district_name'] = $next ? $next->name : '';
 
-    return view('pages.district', array_merge($data, $row));
-});
+    return array_merge($data, $row);
+}
 
-Route::get('/upazila/{id}', function ($id) {
+function upazila($id){
+
     $data = page_fields();
 
     $row = Upazila::findOrFail($id);
@@ -143,67 +192,59 @@ Route::get('/upazila/{id}', function ($id) {
     $row['next_upazila_id'] = $next ? $next->id : '';
     $row['next_upazila_name'] = $next ? $next->name : '';
 
-    return view('pages.upazila', array_merge($data, $row));
+    return array_merge($data, $row);
+}
+
+function pages($url_title) {
+    $data = page_fields();
+
+    $row = Page::where('url_title', $url_title)->first();
+    $row = $row ? $row->toArray() : array();
+
+    return array_merge($data, $row);
+};
+
+function rivers() {
+    $data = page_fields();
+
+    $rivers = River::orderBy('id','asc')->get();
+    $data['rivers'] = $rivers ? $rivers->toArray() : array();
+    //echo "<pre>";print_r($data);exit;
+
+    return $data;
+};
+
+Route::get('/', function () {
+    $data = page_fields();
+
+    $data["district_list"] = district_list();
+    $data["upazila_list"] = upazila_list();
+    $data["haor_list"] = haor_list();
+    
+    //echo "<pre>";print_r($data);exit;
+    return view('pages.home', $data); // view('welcome');
+}); 
+
+Route::get('/district/{id}', function ($id) {
+    $data = district($id);
+
+    return view('pages.district', $data);
+});
+
+Route::get('/upazila/{id}', function ($id) {
+    $data = upazila($id);
+
+    return view('pages.upazila', $data);
 });
 
 Route::get('/haor-detail/{id}', function ($id) {
-    $data = page_fields();
+    $data = haor_detail($id);
 
-    $row = Haor::findOrFail($id);
-    $row = $row ? $row->toArray() : array();
-
-    $json_fields = array(
-        'gallery_items'
-    );
-    foreach ($row as $field => $content) {
-        if(in_array($field, $json_fields) && !empty($content)){
-            $row[$field] = json_decode($content, true);
-        }
-    }
-
-    // get previous haor
-    $prev = Haor::where('id', '<', $id)->orderBy('id','desc')->first();
-    if(empty($prev)){
-        $prev = Haor::orderBy('id','desc')->first();
-    }
-    // get next haor
-    $next = Haor::where('id', '>', $id)->orderBy('id','asc')->first();
-    if(empty($next)){
-        $next = Haor::orderBy('id','asc')->first();
-    }
-
-    //echo "<pre>";print_r($prev);exit;
-
-    $row['prev_haor_id'] = $prev ? $prev->id : '';
-    $row['prev_haor_name'] = $prev ? $prev->name : '';
-    $row['next_haor_id'] = $next ? $next->id : '';
-    $row['next_haor_name'] = $next ? $next->name : '';
-
-    return view('pages.haor-detail', array_merge($data, $row));
+    return view('pages.haor-detail', $data);
 });
 
 Route::get('/haors', function () {
-    $data = page_fields();
-
-    $districts = District::orderBy('id','asc')->select('name', 'id')->get();
-    $data['district_items'] = $districts ? $districts->toArray() : array();
-
-    foreach ($data['district_items'] as $key=>$item) {
-
-        $upazilas = Upazila::where('district_id', $item['id'])->orderBy('name','asc')->select('name', 'id')->get();
-        $data['district_items'][$key]['upazilas'] = $upazilas ? $upazilas->toArray() : array();
-
-        foreach ($data['district_items'][$key]['upazilas'] as $key2=>$item2) {
-
-            $haors = Haor::where('upazila_id', $item2['id'])->orderBy('name','asc')->select('thumb_img','area','name', 'id')->get();
-            $data['district_items'][$key]['upazilas'][$key2]['haors'] = $haors ? $haors->toArray() : array();
-        }
-    }
-
-    //echo "<pre>";print_r($data);exit;
-
-    //$data["haor_items"] = haor_list();
-    //$data["total_haor"] = count($data["haor_items"]);
+    $data = haors();
 
     return view('pages.haors', $data);
 });
@@ -234,7 +275,6 @@ Route::get('/fish', function () {
     return view('pages.fish', $data);
 });
 
-
 Route::get('/cookies', function () {
     $data = page_fields();
 
@@ -254,19 +294,13 @@ Route::get('/terms-of-use', function () {
 });
 
 Route::get('/pages/{url_title}', function ($url_title) {
-    $data = page_fields();
+    $data = pages($url_title);
 
-    $row = Page::where('url_title', $url_title)->first();
-    $row = $row ? $row->toArray() : array();
-
-    return view('pages.page', array_merge($data, $row));
+    return view('pages.page', $data);
 });
 
 Route::get('/rivers', function () {
-    $data = page_fields();
-
-    $rivers = River::orderBy('id','asc')->get();
-    $data['rivers'] = $rivers ? $rivers->toArray() : array();
-    //echo "<pre>";print_r($data);exit;
+    $data = rivers();
+    
     return view('pages.river', $data);
 });
