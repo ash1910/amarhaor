@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Models\LandingPage;
+use App\Models\District;
+use App\Models\Upazila;
+use App\Models\Haor;
+use App\Models\Page;
+use App\Models\River;
+use App\Models\Gallery;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,7 +134,17 @@ Route::get('/pages/{url_title}', function ($url_title) {
 });
 
 Route::get('/rivers', function () {
-    $data = rivers();
+    $data = array();
+    $rivers = River::orderBy('id','asc')->get();
+    $data['rivers'] = $rivers ? $rivers->toArray() : array();
+    
+    return $data;
+});
+
+Route::get('/galleries', function () {
+    $data = array();
+    $galleries = Gallery::orderBy('id','asc')->pluck('image');
+    $data = $galleries ? $galleries->toArray() : array();
     
     return $data;
 });
