@@ -72,9 +72,20 @@ Route::get('/upazila/{id}', function ($id) {
 });
 
 Route::get('/haor-detail/{id}', function ($id) {
-    $data = haor_detail($id);
 
-    return $data;
+    $row = Haor::findOrFail($id);
+    $row = $row ? $row->toArray() : array();
+
+    $json_fields = array(
+        'gallery_items'
+    );
+    foreach ($row as $field => $content) {
+        if(in_array($field, $json_fields) && !empty($content)){
+            $row[$field] = json_decode($content, true);
+        }
+    }
+
+    return $row;
 });
 
 Route::get('/haors', function () {
@@ -147,4 +158,16 @@ Route::get('/galleries', function () {
     $data = $galleries ? $galleries->toArray() : array();
     
     return $data;
+});
+
+Route::get('/haor_list', function () {
+    $haor_list = Haor::select('name', 'id', 'district_id', 'upazila_id')->orderBy('district_id','asc')->orderBy('upazila_id','asc')->orderBy('name','asc')->get();
+    $data = $haor_list ? $haor_list->toArray() : array();
+    return $data;
+});
+Route::get('/district_list', function () {
+    return district_list();
+});
+Route::get('/upazila_list', function () {
+    return upazila_list();
 });
