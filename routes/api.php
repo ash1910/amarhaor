@@ -50,12 +50,6 @@ Route::get('/send_email_quote', function (Request $request) {
 
 Route::get('/home', function () {
     $data = page_fields();
-
-    $data["district_list"] = district_list();
-    $data["upazila_list"] = upazila_list();
-    $data["haor_list"] = haor_list();
-    
-    //echo "<pre>";print_r($data);exit;
     return $data;
 });
 
@@ -139,9 +133,10 @@ Route::get('/terms-of-use', function () {
 });
 
 Route::get('/pages/{url_title}', function ($url_title) {
-    $data = pages($url_title);
+    $row = Page::where('url_title', $url_title)->first();
+    $row = $row ? $row->toArray() : array();
 
-    return $data;
+    return $row;
 });
 
 Route::get('/rivers', function () {
@@ -166,7 +161,9 @@ Route::get('/haor_list', function () {
     return $data;
 });
 Route::get('/district_list', function () {
-    return district_list();
+    $district_list = District::all('name', 'id');
+    $data = $district_list ? $district_list->toArray() : array();
+    return $data;
 });
 Route::get('/upazila_list', function () {
     return upazila_list();
