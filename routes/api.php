@@ -165,6 +165,11 @@ Route::get('/district_list', function () {
     $data = $district_list ? $district_list->toArray() : array();
     return $data;
 });
+Route::get('/district_detail_list', function () {
+    $district_list = District::all('name', 'id', 'header_img');
+    $data = $district_list ? $district_list->toArray() : array();
+    return $data;
+});
 Route::get('/upazila_list', function () {
     return upazila_list();
 });
