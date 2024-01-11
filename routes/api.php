@@ -54,7 +54,15 @@ Route::get('/home', function () {
 });
 
 Route::get('/district/{id}', function ($id) {
-    $data = district($id);
+
+    $upazilas = Upazila::where('district_id', $id)->orderBy('name','asc')->select('name', 'id')->get();
+    $data = $upazilas ? $upazilas->toArray() : array();
+
+    foreach ($data as $key=>$item) {
+
+        $haors = Haor::where('upazila_id', $item['id'])->orderBy('name','asc')->select('thumb_img','area','name', 'id')->get();
+        $data[$key]['haors'] = $haors ? $haors->toArray() : array();
+    }
 
     return $data;
 });
