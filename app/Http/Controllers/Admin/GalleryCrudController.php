@@ -42,8 +42,29 @@ class GalleryCrudController extends CrudController
     {
         $this->crud->setHeading('All Gallery List');
 
+        CRUD::column('seasson')->label('Seasson');
         CRUD::column('gallery_category_id')->type('relationship')->label('Category');
         CRUD::column('name')->label('Image Name');
+
+        //CRUD::filter('gallery_category_id')->label('Category');
+
+        CRUD::filter('seasson')
+                ->label('Seasson')
+                ->type('dropdown')
+                ->values(["Rainy" => "Rainy", "Winter" => "Winter"])
+                ->whenActive(function($value) {
+                  CRUD::addClause('where', 'seasson', $value);
+                });
+
+        CRUD::filter('gallery_category_id')
+                ->label('Category')
+                ->type('select2')
+                ->values(function() {
+                  return \App\Models\GalleryCategory::all()->pluck('name', 'id')->toArray();
+                })
+                ->whenActive(function($value) {
+                  CRUD::addClause('where', 'gallery_category_id', $value);
+                });
 
         $this->crud->denyAccess('show');
     }
@@ -59,6 +80,12 @@ class GalleryCrudController extends CrudController
         CRUD::setValidation(GalleryRequest::class);
         CRUD::setOperationSetting('contentClass', 'col-md-12 bold-labels');
 
+        CRUD::field('seasson')
+                ->type('select_from_array')
+                ->label('Seasson')
+                ->options(["Rainy" => "Rainy", "Winter" => "Winter"])
+                ->size(2);
+
         CRUD::field('gallery_category_id')
                 ->type('select2')
                 ->label('Category')
@@ -68,7 +95,8 @@ class GalleryCrudController extends CrudController
                 ->options(function ($query) {
                     return $query->orderBy('name', 'ASC')->get();
                 })
-                ->size(6);
+                ->size(4);
+                
 
         CRUD::field('name')
                 ->type('text')

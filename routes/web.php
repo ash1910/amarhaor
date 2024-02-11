@@ -17,6 +17,9 @@ use App\Models\Upazila;
 use App\Models\Haor;
 use App\Models\Page;
 use App\Models\River;
+use App\Models\Gallery;
+use App\Models\GalleryCategory;
+use App\Models\Video;
 
 function page_fields(){
 
@@ -214,6 +217,32 @@ function rivers() {
     return $data;
 };
 
+function galleries() {
+    $data = page_fields();
+
+    $g_cats = GalleryCategory::orderBy('id','asc')->select('name', 'id')->get();
+    $data['g_cats'] = $g_cats ? $g_cats->toArray() : array();
+
+    foreach ($data['g_cats'] as $key=>$item) {
+        $galleries = Gallery::where('gallery_category_id', $item['id'])->orderBy('id','asc')->select('image','name', 'id')->get();
+        $data['g_cats'][$key]['galleries'] = $galleries ? $galleries->toArray() : array();
+    }
+    //echo "<pre>";print_r($data);exit;
+
+    return $data;
+};
+
+function videos() {
+    $data = page_fields();
+
+    $videos = Video::orderBy('id','asc')->select('name', 'thumb_img', 'url', 'id')->get();
+    $data['videos'] = $videos ? $videos->toArray() : array();
+
+    //echo "<pre>";print_r($data);exit;
+
+    return $data;
+};
+
 Route::get('/', function () {
     $data = page_fields();
 
@@ -303,4 +332,26 @@ Route::get('/rivers', function () {
     $data = rivers();
     
     return view('pages.river', $data);
+});
+
+Route::get('/galleries', function () {
+    $data = galleries();
+    
+    return view('pages.gallery', $data);
+});
+
+Route::get('/videos', function () {
+    $data = videos();
+    
+    return view('pages.videos', $data);
+});
+
+Route::get('/video/{id}', function ($id) {
+    $data = page_fields();
+
+    $video = Video::findOrFail($id);
+    $data['video'] = $video ? $video->toArray() : array();
+    //echo "<pre>";print_r($data);exit;
+    
+    return view('pages.video-detail', $data);
 });

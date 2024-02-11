@@ -56,6 +56,16 @@ class HaorCrudController extends CrudController
             ],
         ]);
 
+        CRUD::filter('district_id')
+                ->label('District Name')
+                ->type('select2')
+                ->values(function() {
+                  return \App\Models\District::all()->pluck('name', 'id')->toArray();
+                })
+                ->whenActive(function($value) {
+                  CRUD::addClause('where', 'district_id', $value);
+                });
+
         $this->crud->denyAccess('show');
 
     }

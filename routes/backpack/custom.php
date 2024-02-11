@@ -33,4 +33,5 @@ Route::group([
     Route::crud('river', 'RiverCrudController');
     Route::crud('gallery-category', 'GalleryCategoryCrudController');
     Route::crud('gallery', 'GalleryCrudController');
+    Route::crud('video', 'VideoCrudController');
 }); // this should be the absolute last line of this file

@@ -26,7 +26,7 @@
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-cogs"></i> Advanced</a>
     <ul class="nav-dropdown-items">
-      <li class="nav-item"><a class="nav-link" href="{{ backpack_url('elfinder') }}"><i class="nav-icon la la-files-o"></i> <span>File manager</span></a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ backpack_url('elfinder') }}"><i class="nav-icon la la-list"></i> <span>File manager</span></a></li>
       <li class="nav-item"><a class="nav-link" href="{{ backpack_url('backup') }}"><i class="nav-icon la la-hdd-o"></i> <span>Backups</span></a></li>
       <li class="nav-item"><a class="nav-link" href="{{ backpack_url('log') }}"><i class="nav-icon la la-terminal"></i> <span>Logs</span></a></li>
       <li class="nav-item"><a class="nav-link" href="{{ backpack_url('setting') }}"><i class="nav-icon la la-cog"></i> <span>Settings</span></a></li>
@@ -44,10 +44,11 @@
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('landing-page') }}'><i class='nav-icon la la-file-o'></i> Landing page</a></li>
 
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('district') }}'><i class='nav-icon la la-files-o'></i> Districts</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('upazila') }}'><i class='nav-icon la la-files-o'></i> Upazilas</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('haor') }}'><i class='nav-icon la la-files-o'></i> Haors</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('page') }}'><i class='nav-icon la la-files-o'></i> Pages</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('river') }}'><i class='nav-icon la la-files-o'></i> Rivers</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('gallery-category') }}'><i class='nav-icon la la-files-o'></i> Gallery categories</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('gallery') }}'><i class='nav-icon la la-files-o'></i> Galleries</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('district') }}'><i class='nav-icon la la-list'></i> Districts</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('upazila') }}'><i class='nav-icon la la-list'></i> Upazilas</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('haor') }}'><i class='nav-icon la la-list'></i> Haors</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('page') }}'><i class='nav-icon la la-list'></i> Pages</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('river') }}'><i class='nav-icon la la-list'></i> Rivers</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('gallery-category') }}'><i class='nav-icon la la-list'></i> Gallery categories</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('gallery') }}'><i class='nav-icon la la-list'></i> Galleries</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('video') }}'><i class='nav-icon la la-list'></i> Videos</a></li>

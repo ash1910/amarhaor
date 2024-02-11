@@ -247,6 +247,17 @@ Mobile Menu Js
 		}
 	});
 
+	$(".fullscreenVideoBtn").click(function () {
+		let video = $("#topVideo").get(0);
+		if (video.requestFullscreen) {
+			video.requestFullscreen();
+		  } else if (video.webkitRequestFullscreen) { /* Safari */
+		  	video.webkitRequestFullscreen();
+		  } else if (video.msRequestFullscreen) { /* IE11 */
+		  	video.msRequestFullscreen();
+		  }
+	});
+
 })(jQuery);
 
 

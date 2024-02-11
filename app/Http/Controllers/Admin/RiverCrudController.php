@@ -44,6 +44,21 @@ class RiverCrudController extends CrudController
         CRUD::column('region');
         CRUD::column('name');
 
+        CRUD::filter('region')
+                ->label('Region')
+                ->type('dropdown')
+                ->values([
+                    "North West Region" => "North West Region", 
+                    "North Central Region" => "North Central Region", 
+                    "North East Region" => "North East Region", 
+                    "Eastern Hills Region" => "Eastern Hills Region", 
+                    "South East Region" => "South East Region", 
+                    "South West Region" => "South West Region", 
+                ])
+                ->whenActive(function($value) {
+                  CRUD::addClause('where', 'region', $value);
+                });
+
         $this->crud->denyAccess('show');
     }
 
