@@ -51,6 +51,12 @@
           <div class="footer_widget">
             <h6 class="widget_title">ADDRESS</h6>
             <p class="address">{{@$footer_contact_address}}</p>
+            <p><a target="_blank" href="https://play.google.com/store/apps/details?id=com.amarhaor.app" style="max-width: 200px;
+    display: inline-block;
+    border: 1px solid #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;"><img src="/assets/images/google-play-download-android-app-logo-png-transparent.png" alt=""></a></p>
           </div>
         </div>
       </div>
