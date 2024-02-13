@@ -20,6 +20,7 @@ use App\Models\River;
 use App\Models\Gallery;
 use App\Models\GalleryCategory;
 use App\Models\Video;
+use App\Models\Wetland;
 
 function page_fields(){
 
@@ -239,9 +240,55 @@ function videos() {
     $data['videos'] = $videos ? $videos->toArray() : array();
 
     //echo "<pre>";print_r($data);exit;
-
     return $data;
 };
+
+function wetlands() {
+    $data = page_fields();
+
+    $wetlands = Wetland::orderBy('id','asc')->select('thumb_img','area','district','name', 'id')->get();
+    $data['wetlands'] = $wetlands ? $wetlands->toArray() : array();
+
+    //echo "<pre>";print_r($data);exit;
+    return $data;
+};
+
+function wetland_detail($id){
+
+    $data = page_fields();
+
+    $row = Wetland::findOrFail($id);
+    $row = $row ? $row->toArray() : array();
+
+    $json_fields = array(
+        'gallery_items'
+    );
+    foreach ($row as $field => $content) {
+        if(in_array($field, $json_fields) && !empty($content)){
+            $row[$field] = json_decode($content, true);
+        }
+    }
+
+    // get previous haor
+    $prev = Wetland::where('id', '<', $id)->orderBy('id','desc')->first();
+    if(empty($prev)){
+        $prev = Wetland::orderBy('id','desc')->first();
+    }
+    // get next haor
+    $next = Wetland::where('id', '>', $id)->orderBy('id','asc')->first();
+    if(empty($next)){
+        $next = Wetland::orderBy('id','asc')->first();
+    }
+
+    //echo "<pre>";print_r($prev);exit;
+
+    $row['prev_haor_id'] = $prev ? $prev->id : '';
+    $row['prev_haor_name'] = $prev ? $prev->name : '';
+    $row['next_haor_id'] = $next ? $next->id : '';
+    $row['next_haor_name'] = $next ? $next->name : '';
+
+    return array_merge($data, $row);
+}
 
 Route::get('/', function () {
     $data = page_fields();
@@ -354,4 +401,16 @@ Route::get('/video/{id}', function ($id) {
     //echo "<pre>";print_r($data);exit;
     
     return view('pages.video-detail', $data);
+});
+
+Route::get('/wetlands', function () {
+    $data = wetlands();
+    
+    return view('pages.wetlands', $data);
+});
+
+Route::get('/wetland-detail/{id}', function ($id) {
+    $data = wetland_detail($id);
+
+    return view('pages.wetland-detail', $data);
 });

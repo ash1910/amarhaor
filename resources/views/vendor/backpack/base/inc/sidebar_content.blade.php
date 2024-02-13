@@ -52,3 +52,4 @@
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('gallery-category') }}'><i class='nav-icon la la-list'></i> Gallery categories</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('gallery') }}'><i class='nav-icon la la-list'></i> Galleries</a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('video') }}'><i class='nav-icon la la-list'></i> Videos</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('wetland') }}'><i class='nav-icon la la-list'></i> Wetlands</a></li>
