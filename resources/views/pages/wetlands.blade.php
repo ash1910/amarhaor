@@ -4,7 +4,7 @@
 <main id="primary" class="site-main">
 
     <!-- start: Page Headings -->
-    <section class="page-headings" data-bg-image="/assets/images/hero/page-heading.jpg">
+    <section class="page-headings" data-bg-image="/uploads/images/b96bee9a2cd06a52195a1865260a39d3.jpeg">
       <div class="container">
         <div class="row">
           <div class="col">
