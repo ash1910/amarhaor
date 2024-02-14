@@ -32,7 +32,7 @@
             <div class="details_content">
 
             <div style="width: 100%; position: relative;">
-                <video src="{{@$home_top_hero_video_url}}" style="width: 100%;" id="topVideo" loop autoplay muted>
+                <video src="{{@$video['url']}}" style="width: 100%;" id="topVideo" loop autoplay muted>
                 </video>
 
                 <button class="fullscreenVideoBtn" style="position: absolute;
