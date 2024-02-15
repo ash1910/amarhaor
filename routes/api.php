@@ -157,7 +157,7 @@ Route::get('/rivers', function () {
 
 Route::get('/galleries', function () {
     $data = array();
-    $galleries = Gallery::orderBy('id','asc')->pluck('image');
+    $galleries = Gallery::orderBy('id','desc')->pluck('image');
     $data = $galleries ? $galleries->toArray() : array();
     
     return $data;

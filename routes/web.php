@@ -221,7 +221,7 @@ function rivers() {
 function galleries() {
     $data = page_fields();
 
-    $g_cats = GalleryCategory::orderBy('id','asc')->select('name', 'id')->get();
+    $g_cats = GalleryCategory::orderBy('id','desc')->select('name', 'id')->get();
     $data['g_cats'] = $g_cats ? $g_cats->toArray() : array();
 
     foreach ($data['g_cats'] as $key=>$item) {
