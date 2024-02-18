@@ -8,6 +8,8 @@ use App\Models\Haor;
 use App\Models\Page;
 use App\Models\River;
 use App\Models\Gallery;
+use App\Models\Video;
+use App\Models\Wetland;
 
 /*
 |--------------------------------------------------------------------------
@@ -180,4 +182,31 @@ Route::get('/district_detail_list', function () {
 });
 Route::get('/upazila_list', function () {
     return upazila_list();
+});
+Route::get('/videos', function () {
+    $videos = Video::orderBy('id','asc')->select('name', 'thumb_img', 'url', 'id')->get();
+    $data = $videos ? $videos->toArray() : array();
+
+    return $data;
+});
+Route::get('/wetlands', function () {
+    $wetlands = Wetland::orderBy('id','asc')->select('thumb_img','area','district','name', 'id')->get();
+    $data = $wetlands ? $wetlands->toArray() : array();
+    
+    return $data;
+});
+Route::get('/wetland-detail/{id}', function ($id) {
+    $row = Wetland::findOrFail($id);
+    $row = $row ? $row->toArray() : array();
+
+    $json_fields = array(
+        'gallery_items'
+    );
+    foreach ($row as $field => $content) {
+        if(in_array($field, $json_fields) && !empty($content)){
+            $row[$field] = json_decode($content, true);
+        }
+    }
+
+    return $row;
 });
