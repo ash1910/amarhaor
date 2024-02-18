@@ -73,7 +73,12 @@ class VideoCrudController extends CrudController
                 ->label('Thumbnail Image')
                 ->upload(true)
                 ->disk('public')
-                ->size(4);
+                ->size(6);
+
+        CRUD::field('url_mobile')
+                ->type('text')
+                ->label('Video URL For Mobile App')
+                ->size(6);
     }
 
     /**

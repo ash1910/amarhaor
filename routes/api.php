@@ -184,7 +184,7 @@ Route::get('/upazila_list', function () {
     return upazila_list();
 });
 Route::get('/videos', function () {
-    $videos = Video::orderBy('id','asc')->select('name', 'thumb_img', 'url', 'id')->get();
+    $videos = Video::orderBy('id','asc')->select('name', 'thumb_img', 'url', 'url_mobile', 'id')->get();
     $data = $videos ? $videos->toArray() : array();
 
     return $data;
