@@ -90,7 +90,7 @@
   
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-  <script src="http://maps.google.com/maps/api/js?key=AIzaSyCzlF9CQocsHCxPJmQYBYtFoQbyogtv9bE" type="text/javascript"></script>
+  <script src="https://maps.google.com/maps/api/js?key=AIzaSyCzlF9CQocsHCxPJmQYBYtFoQbyogtv9bE" type="text/javascript"></script>
 <script type="text/javascript">
 const locations = [
     {
