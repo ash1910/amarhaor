@@ -414,3 +414,9 @@ Route::get('/wetland-detail/{id}', function ($id) {
 
     return view('pages.wetland-detail', $data);
 });
+
+Route::get('/map', function () {
+    $data = page_fields();
+
+    return view('pages.map', $data);
+});

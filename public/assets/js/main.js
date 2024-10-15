@@ -341,5 +341,13 @@ Mobile Menu Js
     console.log(haor);
   });
 
+  
+  $('.closeBtn').click(function(){
+	$('#locationModal').modal('toggle');
+  });
+
+
+
+
 
 
