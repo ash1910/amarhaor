@@ -45,6 +45,8 @@ class HaorCrudController extends CrudController
         CRUD::column('upazila_id')->type('relationship')->label('Upazila Name');
         CRUD::column('name')->label('Haor Name');
         CRUD::column('area');
+        CRUD::column('latitude')->label('Latitude');
+        CRUD::column('longitude')->label('Longitude');
 
         $this->crud->addColumns([
             [
@@ -91,7 +93,7 @@ class HaorCrudController extends CrudController
                 ->options(function ($query) {
                     return $query->orderBy('name', 'ASC')->get();
                 })
-                ->size(3);
+                ->size(2);
 
         CRUD::field('upazila_id')
                 ->type('select2_from_ajax')
@@ -106,16 +108,26 @@ class HaorCrudController extends CrudController
                 ->options(function ($query) {
                     return $query->orderBy('name', 'ASC')->get();
                 })
-                ->size(3);
+                ->size(2);
 
         CRUD::field('name')
                 ->type('text')
                 ->label('Haor Name')
-                ->size(4);
+                ->size(2);
         
         CRUD::field('area')
                 ->type('text')
                 ->label('Haor Area')
+                ->size(2);
+
+        CRUD::field('latitude')
+                ->type('text')
+                ->label('Latitude')
+                ->size(2);
+
+        CRUD::field('longitude')
+                ->type('text')
+                ->label('Longitude')
                 ->size(2);
 
         CRUD::field('thumb_img')
