@@ -47,6 +47,17 @@ class HaorCrudController extends CrudController
         CRUD::column('area');
         CRUD::column('latitude')->label('Latitude');
         CRUD::column('longitude')->label('Longitude');
+        //CRUD::column('show_in_map')->label('Show In Map?');
+
+        $this->crud->addColumns([
+            [
+                'name' => 'Show In Map?',
+                'type' => 'closure',
+                'function' => function($entry) {
+                    return $entry->show_in_map == 1 ? "Yes" : "No";
+                },
+            ],
+        ]);
 
         $this->crud->addColumns([
             [
@@ -130,26 +141,31 @@ class HaorCrudController extends CrudController
                 ->label('Longitude')
                 ->size(2);
 
+        CRUD::field('show_in_map')
+                ->type('checkbox')
+                ->label('Show In Map?')
+                ->size(3);
+
         CRUD::field('thumb_img')
                 ->type('image')
                 ->label('Thumbnail Image')
                 ->upload(true)
                 ->disk('public')
-                ->size(4);
+                ->size(3);
 
         CRUD::field('thumb_img_big')
                 ->type('image')
                 ->label('Thumbnail Image Big (optional)')
                 ->upload(true)
                 ->disk('public')
-                ->size(4);
+                ->size(3);
 
         CRUD::field('header_img')
                 ->type('image')
                 ->label('Header Image')
                 ->upload(true)
                 ->disk('public')
-                ->size(4);
+                ->size(3);
 
         CRUD::field('overview')
                 ->type('textarea')
