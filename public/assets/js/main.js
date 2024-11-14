@@ -343,7 +343,9 @@ Mobile Menu Js
 
   
   $('.closeBtn').click(function(){
-	$('#locationModal').modal('toggle');
+	//$('#locationModal').modal('toggle');
+	$('#locationModal').modal('hide');
+	$('#locationModalInsideMap').modal('hide');
   });
 
 

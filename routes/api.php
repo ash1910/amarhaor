@@ -210,3 +210,25 @@ Route::get('/wetland-detail/{id}', function ($id) {
 
     return $row;
 });
+
+Route::get('/haor_list_for_map', function () {
+    $data = array();
+
+    $districts = District::pluck('name', 'id');
+    $data['district_items'] = $districts ? $districts->toArray() : array();
+
+    $upazilas = Upazila::pluck('name', 'id');
+    $data['upazila_items'] = $upazilas ? $upazilas->toArray() : array();
+
+    $haor_list = Haor::select('name', 'id', 'district_id', 'upazila_id', 'latitude', 'longitude')->where('show_in_map', 1)->orderBy('district_id','asc')->orderBy('upazila_id','asc')->orderBy('name','asc')->get();
+    $data['haor_items'] = $haor_list ? $haor_list->toArray() : array();
+
+    foreach ($data['haor_items'] as $key => $item) {
+        $data['haor_items'][$key]['district'] = $data['district_items'][$item['district_id']];
+        $data['haor_items'][$key]['upazila'] = $data['upazila_items'][$item['upazila_id']];
+    }
+
+    //echo "<pre>";print_r($data);
+
+    return $data;
+});

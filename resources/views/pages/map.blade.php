@@ -19,6 +19,9 @@
   .gm-style .gm-ui-hover-effect>span {
     background-color: #fff;
   }
+  .modal-backdrop{
+    display: none;
+  }
 </style>
 
 <!-- Include Bootstrap JS (make sure it's loaded after the Google Maps API script) -->
@@ -62,6 +65,98 @@
         </div>
         <div class="modal-body" style="background-color: rgba(0, 182, 94, .1);">
           <div class="row">
+             <div class="col-xs-12 col-md-12">
+
+              <!-- start: Page Headings -->
+              <section class="page-headings haor-bg-image" data-bg-image="">
+                <div class="container">
+                  <div class="row">
+                    <div class="col">
+                      <div class="page_heading_content text-center">
+                        <h2 class="title"></h2>
+                        <div class="page_heading_info">
+                          <span class="haor-area">>Area</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- end: Page Headings -->
+
+              <!-- start: Haor Overview -->
+              <section class="haor-overview">
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                      <div class="haor_overview_content text-center">
+                        <h5 class="subtitle">OVERVIEW</h5>
+                        <div class="desc">
+                          <p class="haor_overview_content_data"></p>
+                        </div>
+
+                        <!-- <div class="overview_carousel owl-carousel">
+                        @foreach ($gallery_items ?? array() as $item)
+                          <div class="overview_carousel_item">
+                            <img src="{{ url(@$item['image'] ?? '')}}" alt="">
+                          </div>
+                        @endforeach
+                        </div> -->
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- end: Haor Overview -->
+              
+              <!-- start: Haor Details -->
+              <section class="haor-details">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-xl-7 col-lg-8">
+                      <div class="details_content">
+                      </div>
+                    </div>
+                    <div class="col-lg-4 offset-xl-1">
+                      <aside class="main-sidebar">
+
+                        <div class="sidebar_widget haor-information">
+  
+                        </div>
+
+                      </aside>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- end: Haor Details -->
+
+
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="background-color: rgba(0, 182, 94, .2);">
+          <button type="button" class="btn btn-default closeBtn" data-dismiss="modal" style="background-color: rgb(0, 182, 94); color: white;">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="locationModalInsideMap" role="dialog">
+    <div class="modal-dialog" style="width: 90%; max-width: 135vh;">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: rgba(0, 182, 94, .2);">
+          <h4 class="modal-title haorTitle"></h4>
+          <button type="button" class="close closeBtn" data-dismiss="modal" style="font-size: 22px;">X</button>
+        </div>
+        <div class="modal-body" style="background-color: rgba(0, 182, 94, .1);">
+          <div class="row">
              <div class="col-xs-12 col-md-8">
               <p><img src="" class="haorTitleImage img-responsive" alt="Location Image"></img></p>
               <p><strong>Description:</strong></p>
@@ -92,7 +187,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
   <script src="https://maps.google.com/maps/api/js?key=AIzaSyCzlF9CQocsHCxPJmQYBYtFoQbyogtv9bE" type="text/javascript"></script>
 <script type="text/javascript">
-const locations = [
+var locations = [
     {
         lat: 25.1400478,
         lng: 91.0857529,
@@ -349,6 +444,7 @@ const locations = [
     // Add more locations...
 ];
 
+var haor_locations = [];
 // Initialize the map
 const map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 23.8941228, lng: 90.3874321 },
@@ -357,47 +453,103 @@ const map = new google.maps.Map(document.getElementById('map'), {
 
 // Create markers and info windows
 //for (const loc of locations) {
-for (const [i, loc] of locations.entries()) {
 
-    const marker = new google.maps.Marker({
-        position: { lat: loc.lat, lng: loc.lng },
-        map: map,
-        icon: {
-            url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" // Replace with your color URL
-        }
-    });
 
-    const infowindow = new google.maps.InfoWindow({
-        content: `<div class="MapInfoWindow" onClick={showModal(${i})}><strong>${loc.content}</strong><br>${loc.address}</div>`,
-    });
-    
-    // Delayed opening of info window (adjust the timeout as needed)
-    setTimeout(() => {
-        infowindow.open(map, marker);
-    }, 2000); // 2 seconds delay
+  const showMarker = function(haor_locations){
 
-    // Add a click event listener to open the info window when the marker is clicked
-    marker.addListener('click', () => {
-        infowindow.open(map, marker);
-        showModal(i);
+    for (const [i, loc] of haor_locations.entries()) {
+      console.log(loc);
+      const marker = new google.maps.Marker({
+          position: { lat: Number(loc.latitude), lng: Number(loc.longitude) },
+          map: map,
+          icon: {
+              url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" // Replace with your color URL
+          }
+      });
+
+      const infowindow = new google.maps.InfoWindow({
+          content: `<div class="MapInfoWindow" onClick={showModal(${loc.id})}><strong>${loc.name}</strong><br>${loc.upazila}, ${loc.district}</div>`,
+      });
+
+      // Delayed opening of info window (adjust the timeout as needed)
+      setTimeout(() => {
+          infowindow.open(map, marker);
+      }, 2000); // 2 seconds delay
+
+      // Add a click event listener to open the info window when the marker is clicked
+      marker.addListener('click', () => {
+          infowindow.open(map, marker);
+          showModal(loc.id);
+      });
+
+    }
+  }
+
+
+
+
+  window.onload = function(){
+
+    $.get('/api/haor_list_for_map', function(response) {
+      // Log the response to the console
+      //console.log("Response: "+response);
+      haor_locations = response.haor_items;
+      showMarker(haor_locations);
+      //console.log("Response: " + haor_locations);
     });
 
   }
 
-  
-  const showModal = function(i){
+  const showModal = function(haor_id){
       // Update modal content
-      var loc = locations[i];
-      $('#locationModal .haorTitle').html(loc.content);
-      $('#locationModal .haorDescription').html(loc.description);
-      $('#locationModal .haorAbout').html(loc.about);
-      $('#locationModal .haorDesignations').html(loc.designations);
-      $('#locationModal .haorLocation').html(loc.location);
-      $('#locationModal .haorArea').html(loc.area);
-      $('#locationModal .haorTitleImage').attr("src", loc.titleImage);
+      $.get(`/api/haor-detail/${haor_id}`, function(response) {
+        // Log the response to the console
+        console.log("Response: "+response);
+        //haor_locations = response.haor_items;
+        openModal(response);
+        //console.log("Response: " + haor_locations);
+      });
 
-      // Show the modal
-      $('#locationModal').modal('show');
+  }
+
+  
+  const openModal = function(haor_detail){
+      // Update modal content
+      //var loc = locations[i];
+      const site_url = "https://amarhaor.com/";
+
+      var isFullScreen = document.fullScreen ||
+        document.mozFullScreen ||
+        document.webkitIsFullScreen;
+
+      if (isFullScreen) {
+          console.log('fullScreen!');
+          $('#locationModalInsideMap .haorTitle').html(loc.content);
+          $('#locationModalInsideMap .haorDescription').html(loc.description);
+          $('#locationModalInsideMap .haorAbout').html(loc.about);
+          $('#locationModalInsideMap .haorDesignations').html(loc.designations);
+          $('#locationModalInsideMap .haorLocation').html(loc.location);
+          $('#locationModalInsideMap .haorArea').html(loc.area);
+          $('#locationModalInsideMap .haorTitleImage').attr("src", loc.titleImage);
+
+          map.controls[google.maps.ControlPosition.TOP_LEFT].push(document.getElementById("locationModalInsideMap"));
+          $('#locationModalInsideMap').modal('show');
+      } else {
+          console.log('NO fullScreen!');
+          $('#locationModal .haorTitle').html(haor_detail.name);
+          $('#locationModal .details_content').html(haor_detail.description);
+          $('#locationModal .haor-information').html(haor_detail.about);
+          $('#locationModal .haor_overview_content_data').html(haor_detail.overview);
+          
+          $('#locationModal .haor-area').html("Area " + haor_detail.area);
+          $('#locationModal .title').html(haor_detail.name);
+          //$('#locationModal .haorArea').html(loc.area);
+          $('#locationModal .haor-bg-image').attr("data-bg-image", site_url + haor_detail.header_img);
+          $('#locationModal .haor-bg-image').css("background-image", `url(${site_url}${haor_detail.header_img})`);  
+
+          $('#locationModal').modal('show');
+      }
+      
   }
 
 
