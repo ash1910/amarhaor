@@ -45,6 +45,18 @@ class WetlandCrudController extends CrudController
         CRUD::column('area');
         CRUD::column('district')->label('District');
         CRUD::column('upazila')->label('Upazila');
+        CRUD::column('latitude')->label('Latitude');
+        CRUD::column('longitude')->label('Longitude');
+
+        $this->crud->addColumns([
+            [
+                'name' => 'Show In Map?',
+                'type' => 'closure',
+                'function' => function($entry) {
+                    return $entry->show_in_map == 1 ? "Yes" : "No";
+                },
+            ],
+        ]);
 
         $this->crud->addColumns([
             [
@@ -74,7 +86,7 @@ class WetlandCrudController extends CrudController
         CRUD::field('name')
                 ->type('text')
                 ->label('Wetland Name')
-                ->size(4);
+                ->size(2);
         
         CRUD::field('area')
                 ->type('text')
@@ -84,11 +96,26 @@ class WetlandCrudController extends CrudController
         CRUD::field('district')
                 ->type('text')
                 ->label('District Name')
-                ->size(3);
+                ->size(2);
 
         CRUD::field('upazila')
                 ->type('text')
                 ->label('Upazila Name')
+                ->size(2);
+
+        CRUD::field('latitude')
+                ->type('text')
+                ->label('Latitude')
+                ->size(2);
+
+        CRUD::field('longitude')
+                ->type('text')
+                ->label('Longitude')
+                ->size(2);
+
+        CRUD::field('show_in_map')
+                ->type('checkbox')
+                ->label('Show In Map?')
                 ->size(3);
 
         CRUD::field('thumb_img')
@@ -96,21 +123,21 @@ class WetlandCrudController extends CrudController
                 ->label('Thumbnail Image')
                 ->upload(true)
                 ->disk('public')
-                ->size(4);
+                ->size(3);
 
         CRUD::field('thumb_img_big')
                 ->type('image')
                 ->label('Thumbnail Image Big (optional)')
                 ->upload(true)
                 ->disk('public')
-                ->size(4);
+                ->size(3);
 
         CRUD::field('header_img')
                 ->type('image')
                 ->label('Header Image')
                 ->upload(true)
                 ->disk('public')
-                ->size(4);
+                ->size(3);
 
         CRUD::field('overview')
                 ->type('textarea')
