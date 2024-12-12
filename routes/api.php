@@ -210,3 +210,57 @@ Route::get('/wetland-detail/{id}', function ($id) {
 
     return $row;
 });
+
+Route::get('/haor_list_for_map', function () {
+    $data = array();
+
+    $districts = District::pluck('name', 'id');
+    $data['district_items'] = $districts ? $districts->toArray() : array();
+
+    $upazila_list = Upazila::all('name', 'id', 'district_id');
+    $data['upazila_items'] = $upazila_list ? $upazila_list->toArray() : array();
+
+    $upazilas = Upazila::pluck('name', 'id');
+    $upazila_items = $upazilas ? $upazilas->toArray() : array();
+
+    $haor_list = Haor::select('name', 'id', 'district_id', 'upazila_id', 'latitude', 'longitude')->where('show_in_map', 1)->orderBy('district_id','asc')->orderBy('upazila_id','asc')->orderBy('name','asc')->get();
+    $data['haor_items'] = $haor_list ? $haor_list->toArray() : array();
+
+    $wetland_list = Wetland::select('name', 'id', 'district', 'upazila', 'latitude', 'longitude')->where('show_in_map', 1)->orderBy('name','asc')->get();
+    $data['wetland_items'] = $wetland_list ? $wetland_list->toArray() : array();
+
+    foreach ($data['haor_items'] as $key => $item) {
+        $data['haor_items'][$key]['district'] = $data['district_items'][$item['district_id']];
+        $data['haor_items'][$key]['upazila'] = $upazila_items[$item['upazila_id']];
+    }
+
+    //echo "<pre>";print_r($data);
+
+    return $data;
+});
+
+Route::get('/map-haor-detail/{id}', function ($id) {
+
+    
+    if( substr($id, 0, 1) == "w" ){
+        // for Map
+        $row = Wetland::findOrFail( substr($id, 1) );
+        $row = $row ? $row->toArray() : array();
+    }
+    else{ 
+        $row = Haor::findOrFail($id);
+        $row = $row ? $row->toArray() : array();
+    }
+    
+
+    $json_fields = array(
+        'gallery_items'
+    );
+    foreach ($row as $field => $content) {
+        if(in_array($field, $json_fields) && !empty($content)){
+            $row[$field] = json_decode($content, true);
+        }
+    }
+
+    return $row;
+});

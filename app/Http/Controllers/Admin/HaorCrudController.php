@@ -45,6 +45,19 @@ class HaorCrudController extends CrudController
         CRUD::column('upazila_id')->type('relationship')->label('Upazila Name');
         CRUD::column('name')->label('Haor Name');
         CRUD::column('area');
+        CRUD::column('latitude')->label('Latitude');
+        CRUD::column('longitude')->label('Longitude');
+        //CRUD::column('show_in_map')->label('Show In Map?');
+
+        $this->crud->addColumns([
+            [
+                'name' => 'Show In Map?',
+                'type' => 'closure',
+                'function' => function($entry) {
+                    return $entry->show_in_map == 1 ? "Yes" : "No";
+                },
+            ],
+        ]);
 
         $this->crud->addColumns([
             [
@@ -91,7 +104,7 @@ class HaorCrudController extends CrudController
                 ->options(function ($query) {
                     return $query->orderBy('name', 'ASC')->get();
                 })
-                ->size(3);
+                ->size(2);
 
         CRUD::field('upazila_id')
                 ->type('select2_from_ajax')
@@ -106,38 +119,53 @@ class HaorCrudController extends CrudController
                 ->options(function ($query) {
                     return $query->orderBy('name', 'ASC')->get();
                 })
-                ->size(3);
+                ->size(2);
 
         CRUD::field('name')
                 ->type('text')
                 ->label('Haor Name')
-                ->size(4);
+                ->size(2);
         
         CRUD::field('area')
                 ->type('text')
                 ->label('Haor Area')
                 ->size(2);
 
+        CRUD::field('latitude')
+                ->type('text')
+                ->label('Latitude')
+                ->size(2);
+
+        CRUD::field('longitude')
+                ->type('text')
+                ->label('Longitude')
+                ->size(2);
+
+        CRUD::field('show_in_map')
+                ->type('checkbox')
+                ->label('Show In Map?')
+                ->size(3);
+
         CRUD::field('thumb_img')
                 ->type('image')
                 ->label('Thumbnail Image')
                 ->upload(true)
                 ->disk('public')
-                ->size(4);
+                ->size(3);
 
         CRUD::field('thumb_img_big')
                 ->type('image')
                 ->label('Thumbnail Image Big (optional)')
                 ->upload(true)
                 ->disk('public')
-                ->size(4);
+                ->size(3);
 
         CRUD::field('header_img')
                 ->type('image')
                 ->label('Header Image')
                 ->upload(true)
                 ->disk('public')
-                ->size(4);
+                ->size(3);
 
         CRUD::field('overview')
                 ->type('textarea')
